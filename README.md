@@ -10,7 +10,8 @@ Written from the perspective of a systems integrator working across multiple reg
 
 ## Read the Paper
 
-- [Executive Brief](https://signature-strategy.github.io/compliance-first-architecture/short.html) — the short version
+- [Executive Brief — Light theme](https://signature-strategy.github.io/compliance-first-architecture/short-light.html) — the short version
+- [Executive Brief — Dark theme](https://signature-strategy.github.io/compliance-first-architecture/short-dark.html) — the short version
 - [Full Paper — Light theme](https://signature-strategy.github.io/compliance-first-architecture/light.html)
 - [Full Paper — Dark theme](https://signature-strategy.github.io/compliance-first-architecture/dark.html)
 

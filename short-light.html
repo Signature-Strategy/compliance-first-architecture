@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Executive Brief &mdash; Compliance-First Data Processing</title>
+<script src="https://hypothes.is/embed.js" async></script>
+<style>
+
+:root {
+    --ex-cyan-400: #FF9425; --ex-cyan-500: #EF6A00; --ex-cyan-700: #CC5A00;
+    --ex-navy: #333F48; --ex-slate-800: #1E293B; --ex-slate-700: #334155;
+    --ex-slate-600: #475569; --ex-slate-500: #64748B; --ex-slate-400: #94A3B8;
+    --ex-slate-300: #CBD5E1; --ex-slate-200: #E2E8F0; --ex-slate-100: #F1F5F9;
+    --ex-slate-50: #F8FAFC; --ex-slate-900: #0F172A;
+    --ex-emerald: #10B981; --ex-amber: #F59E0B; --ex-red: #EF4444; --ex-blue: #3B82F6;
+    --bg: white; --fg: var(--ex-slate-900); --bg-alt: var(--ex-slate-100);
+    --border: var(--ex-slate-200); --th-bg: var(--ex-slate-800); --th-fg: var(--ex-slate-50);
+    --bq-bg: #FFF7ED; --bq-fg: var(--ex-slate-800);
+    --code-bg: var(--ex-slate-100); --code-border: var(--ex-slate-200); --code-fg: var(--ex-cyan-700);
+    --h1-color: var(--ex-cyan-700); --h2-color: var(--ex-slate-900); --h3-color: var(--ex-slate-800);
+    --h4-color: var(--ex-slate-700); --link-color: var(--ex-cyan-700);
+}
+
+@page { size: A4; margin: 18mm 16mm 22mm 16mm;
+    @bottom-center { content: "Compliance-First Data Processing \2014 Daniel Berry"; font-size: 7pt; color: #64748B; font-family: 'Segoe UI', sans-serif; }
+    @bottom-right { content: counter(page); font-size: 7pt; color: #64748B; font-family: 'Segoe UI', sans-serif; }
+}
+@page :first { @bottom-center { content: none; } @bottom-right { content: none; } }
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Inter', 'Helvetica Neue', sans-serif; font-size: 10pt; line-height: 1.7; color: var(--fg); background: var(--bg); max-width: 900px; margin: 0 auto; padding: 20px 40px; }
+h1 { font-size: 20pt; font-weight: 600; color: var(--h1-color); margin: 28px 0 10px; }
+h2 { font-size: 14pt; font-weight: 600; color: var(--h2-color); margin: 28px 0 8px; padding-bottom: 4px; border-bottom: 2px solid var(--ex-cyan-500); }
+h3 { font-size: 11pt; font-weight: 600; color: var(--h3-color); margin: 18px 0 6px; }
+h4 { font-size: 10pt; font-weight: 600; color: var(--h4-color); margin: 14px 0 4px; }
+p { margin: 8px 0; }
+a { color: var(--link-color); text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { font-weight: 600; }
+em { font-style: italic; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 9pt; }
+thead th { background: var(--th-bg); color: var(--th-fg); font-weight: 600; text-align: left; padding: 8px 12px; font-size: 8.5pt; text-transform: uppercase; letter-spacing: 0.04em; }
+tbody td { padding: 6px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tbody tr:nth-child(even) { background: var(--bg-alt); }
+code { font-family: Consolas, 'JetBrains Mono', monospace; font-size: 8.5pt; background: var(--code-bg); border: 1px solid var(--code-border); border-radius: 3px; padding: 1px 5px; color: var(--code-fg); }
+pre { background: var(--code-bg); border: 1px solid var(--code-border); border-radius: 4px; padding: 12px; overflow-x: auto; margin: 12px 0; }
+pre code { border: none; padding: 0; background: none; }
+blockquote { border-left: 3px solid var(--ex-cyan-500); background: var(--bq-bg); padding: 12px 18px; margin: 14px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; color: var(--bq-fg); }
+ul, ol { padding-left: 22px; margin: 8px 0; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+.cover { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 90vh; text-align: center; background: linear-gradient(135deg, var(--ex-navy) 0%, var(--ex-slate-800) 100%); color: #F1F5F9; margin: -20px -40px 30px; padding: 60px 40px; }
+.cover .brand { font-size: 11pt; font-weight: 300; letter-spacing: 6px; text-transform: uppercase; color: #94A3B8; margin-bottom: 30px; }
+.cover h1 { font-size: 24pt; font-weight: 300; letter-spacing: 1px; margin: 0; line-height: 1.3; color: #F1F5F9; border: none; }
+.cover .accent { width: 60px; height: 2px; background: linear-gradient(90deg, #FF9425, #EF6A00); margin: 24px auto; }
+.cover .subtitle { font-size: 11pt; color: #CBD5E1; margin-top: 8px; font-weight: 400; }
+.cover .doc-meta { font-size: 9pt; color: #64748B; margin-top: 30px; line-height: 2.2; }
+.cover .author-name { font-size: 10pt; color: #FF9425; font-weight: 400; letter-spacing: 1px; }
+.full-paper-link { display: inline-block; margin-top: 24px; font-size: 9pt; color: #FF9425; border: 1px solid #FF9425; border-radius: 4px; padding: 6px 16px; text-decoration: none; }
+.full-paper-link:hover { background: rgba(255, 148, 37, 0.1); text-decoration: none; }
+.section-ref { font-size: 8.5pt; color: var(--ex-slate-500); margin-top: 4px; }
+.section-ref a { color: var(--ex-slate-400); }
+.footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; font-size: 8.5pt; color: var(--ex-slate-500); }
+.footer a { color: var(--link-color); }
+
+</style>
+</head>
+<body>
+<div style="position:fixed;top:12px;right:16px;z-index:100"><a href="short-dark.html" style="font-size:8.5pt;color:var(--ex-slate-400);text-decoration:none;padding:4px 10px;border:1px solid var(--border);border-radius:4px;background:var(--bg)">Dark mode</a></div>
+<div class="cover">
+    <div class="brand">Signature Strategy</div>
+    <h1>Compliance-First Data Processing</h1>
+    <div class="accent"></div>
+    <div class="subtitle">Executive Brief</div>
+    <div class="doc-meta">
+        <span class="author-name">Daniel Berry</span><br/>
+        March 2026
+    </div>
+    <a class="full-paper-link" href="light.html">Read the full paper &rarr;</a>
+</div>
+
+<p>This is a condensed overview of a longer research paper. It covers the core thesis and the nine architectural principles that emerge from it. For the regulatory citations, convergence analysis, validation methodology, sector-specific detail, and appendices, <a href="light.html">read the full paper</a>.</p>
+
+<h2>The Question Every Regulator Asks</h2>
+
+<blockquote>
+<p><em>Can you account for every item you processed, and can you prove it?</em></p>
+</blockquote>
+
+<p>Civil litigation, digital forensics, federal records management, financial services, and data privacy each arrive at this question through different statutes and different enforcement mechanisms. But when their requirements are mapped to processing engine architecture, they converge on the same set of demands.</p>
+
+<p>This convergence is not coincidental. Every tradition addresses the same fundamental problem: when data passes through a system, how do you prove nothing was lost, nothing was altered, integrity is intact, and the system&rsquo;s behavior is documented and reproducible?</p>
+
+<h2>What &ldquo;Compliance-First&rdquo; Means</h2>
+
+<p>Compliance-first design treats legal and regulatory standards as <strong>hard architectural constraints</strong>: not features to be enabled, but invariants that cannot be violated. Three pillars:</p>
+
+<ol>
+  <li>Every technical decision is evaluated against the governing standards before implementation.</li>
+  <li>The engine&rsquo;s internal behavior is observable and auditable.</li>
+  <li>Verification is automated and runs on every extraction.</li>
+</ol>
+
+<p>The distinction between a processing engine that <em>happens</em> to be compliant and one <em>designed</em> for compliance is the distinction between luck and intent. Courts, regulators, records officers, and privacy authorities all evaluate intent.</p>
+
+<h2>Five Regulatory Traditions, One Architecture</h2>
+
+<p>The paper examines five traditions that govern how electronically stored information must be handled:</p>
+
+<table>
+<thead>
+<tr><th>Tradition</th><th>Core Concern</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Civil Litigation</strong></td><td>Proportional preservation and production of ESI; defensibility under Daubert and the Federal Rules</td></tr>
+<tr><td><strong>Digital Forensics</strong></td><td>Reproducibility, chain of custody, and evidentiary integrity per ISO 27037/27042 and SWGDE</td></tr>
+<tr><td><strong>Federal Records</strong></td><td>Disposition authority, NARA transfer requirements, FOIA architecture, CUI handling</td></tr>
+<tr><td><strong>Financial Services</strong></td><td>WORM-compliant audit trails, communications capture, SEC/FINRA examination readiness</td></tr>
+<tr><td><strong>Privacy &amp; Cross-Border</strong></td><td>Purpose limitation, data minimization, right to erasure, cross-border transfer controls under GDPR</td></tr>
+</tbody>
+</table>
+
+<p>When these five sets of requirements are laid side by side, nine architectural principles emerge. Each principle is demanded by multiple traditions independently. The full paper maps every principle to its specific statutory and standards citations across all five traditions.</p>
+
+<p class="section-ref"><a href="light.html#the-regulatory-convergence">Full convergence table &rarr; Section 4</a></p>
+
+<h2>The Nine Principles</h2>
+
+<table>
+<thead>
+<tr><th>#</th><th>Principle</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>No Silent Drops</strong></td>
+<td>Every item the engine encounters must produce a database record. If extraction fails, the record contains a stub with whatever metadata is available, the error, and the timestamp. A missing item is potential spoliation, a records violation, or a gap in regulatory production.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Cryptographic Integrity</strong></td>
+<td>Source files hashed before and after processing; every extracted item hashed. SHA-256 at minimum; forensic mode adds MD5, SHA-1, SHA-512, and SHA3-256 in a single streaming pass. Collection manifests compared to verify nothing changed between acquisition and processing.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Chain of Custody</strong></td>
+<td>Every item carries a custody record: who processed it, when, with what software version, and in what order. A forensic examiner can reconstruct exactly what the engine did.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Audit Trail</strong></td>
+<td>Every deviation from normal processing is documented with a reason. This answers &ldquo;what happened to the items that didn&rsquo;t process normally?&rdquo; before anyone asks.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Processing Manifest</strong></td>
+<td>A per-run record of all parameters, software versions and dependencies, operator identity, configuration, hash algorithm selection with justification, and outcomes. The compliance artifact that proves what was done and how.</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Content-Addressed Storage</strong></td>
+<td>Extracted binaries stored at hash-derived paths. Provides automatic deduplication, tamper detection, and integrity verification at any time without re-processing.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Automated Compliance Verification</strong></td>
+<td>After every extraction, a compliance gate runs and produces pass/fail results. Self-assessment is necessary, though not sufficient &mdash; independent validation is also required.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Encrypted Content Handling</strong></td>
+<td>&ldquo;Encrypted&rdquo; is not &ldquo;Failed.&rdquo; Encrypted items are identified, categorized by encryption type, and documented &mdash; not silently skipped. The distinction drives different triage workflows and different legal responses.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Algorithmic Decision Transparency</strong></td>
+<td>When AI or machine-learning models assist classification, prioritization, privilege review, or relevance scoring, the engine must log which model was used, its version, the confidence score, and whether a human reviewed the output. Supports FRE 702 (expert testimony), GDPR Article 22 (automated decision-making), the EU AI Act Article 14 (human oversight), and NIST AI RMF governance expectations.</td>
+</tr>
+</tbody>
+</table>
+
+<p class="section-ref"><a href="light.html#nine-defensible-principles">Full principle analysis &rarr; Section 5</a></p>
+
+<blockquote>
+<p><strong>These nine principles are necessary but not sufficient.</strong> They define the architectural foundation. An engine that implements all nine without the organizational process controls &mdash; legal hold enforcement, retention governance, operator qualification, exception triage with sign-off authority &mdash; has the infrastructure for compliance without the practice of it.</p>
+</blockquote>
+
+<h2>Two Processing Modes</h2>
+
+<p>A compliance-first engine supports configurable processing depth, not because compliance should be optional, but because <strong>proportionality demands it</strong>. Full forensic rigor for a $200,000 contract dispute could itself be challenged as disproportionate.</p>
+
+<table>
+<thead>
+<tr><th>Capability</th><th>Forensic Mode</th><th>Standard Mode</th></tr>
+</thead>
+<tbody>
+<tr><td>Hash algorithms</td><td>All 5 (single pass)</td><td>SHA-256 only</td></tr>
+<tr><td>Custody log</td><td>Full</td><td>Lightweight</td></tr>
+<tr><td>Audit log</td><td>Per-deviation</td><td>Exceptions &amp; mode decisions</td></tr>
+<tr><td>Compliance gate</td><td>All checks</td><td>Structural checks</td></tr>
+</tbody>
+</table>
+
+<p><strong>Seven features cannot be disabled in either mode:</strong> no-silent-drops, SHA-256 hashing, failed stub records, a custody log, an audit log, operator authorization recording, and the processing manifest.</p>
+
+<p>When processing mode is reduced, every output must make that fact unambiguous. Mode selection for matters under litigation hold, regulatory obligation, or FOIA request should be made by counsel, compliance, or the records officer &mdash; not by the processing operator.</p>
+
+<p class="section-ref"><a href="light.html#the-processing-mode-question">Full mode analysis &rarr; Section 6</a></p>
+
+<h2>Validation: Trust but Verify</h2>
+
+<p>A reconciliation report generated by the same system that processed the data cannot detect its own blind spots. If the system silently drops items without recording them, the report will not detect it. Automated self-checks are necessary but not sufficient.</p>
+
+<p>The paper defines three independent validation mechanisms:</p>
+
+<ol>
+  <li><strong>Automated internal consistency checks</strong> &mdash; the engine verifies its own records after every run.</li>
+  <li><strong>A structured validation protocol</strong> &mdash; cross-tool comparison, fidelity testing against golden manifests, and reproducibility testing.</li>
+  <li><strong>A three-rate error framework</strong> that distinguishes:
+    <ul>
+      <li><strong>Accounting errors</strong> &mdash; items encountered but not recorded (target: zero)</li>
+      <li><strong>Processing errors</strong> &mdash; items recorded but not successfully extracted (inherent; reported per run)</li>
+      <li><strong>Fidelity errors</strong> &mdash; items extracted with incorrect content (hardest to measure, most legally significant)</li>
+    </ul>
+  </li>
+</ol>
+
+<p>A single &ldquo;error rate&rdquo; conflates failures with fundamentally different causes, consequences, and remediation paths.</p>
+
+<p class="section-ref"><a href="light.html#validation-and-independent-verification">Full validation protocol &rarr; Section 10</a></p>
+
+<h2>The Goal</h2>
+
+<p>The goal is not perfection. No processing engine achieves zero failures across all data. The goal is <strong>defensibility</strong>: the ability to demonstrate, with evidence, that reasonable steps were taken, that every item was accounted for, that every failure was documented, and that the methodology is transparent, reproducible, validated, and aligned with the standards that govern the handling of electronically stored information &mdash; regardless of which regulatory tradition is asking.</p>
+
+<blockquote>
+<p>The full paper provides the complete regulatory analysis, convergence mapping, sector-specific requirements, security architecture, attack surface analysis, validation methodology, and five detailed appendices covering regulatory detail, fidelity taxonomy, hash algorithm selection, architectural specifications, and distributed deployment.</p>
+<p><a href="light.html">Read the full paper &rarr;</a></p>
+</blockquote>
+
+<div class="footer">
+    <p>Daniel Berry &mdash; 2026</p>
+    <p><a href="light.html">Full paper (light)</a> &middot; <a href="dark.html">Full paper (dark)</a> &middot; <a href="short-dark.html">This brief (dark)</a></p>
+</div>
+
+</body>
+</html>
