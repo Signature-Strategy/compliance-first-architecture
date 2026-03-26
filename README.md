@@ -17,6 +17,12 @@ Written from the perspective of a systems integrator working across multiple reg
 
 The paper is published with [Hypothesis](https://web.hypothes.is/) annotation enabled. Create a free Hypothesis account to leave inline comments directly on the document.
 
+## Acknowledgments
+
+This paper benefited enormously from the peer review and practitioner insight of [Aidan Booth](https://ashcroftforensicadvisory.com/) of Ashcroft Forensic Advisory. Aidan's depth of experience across digital forensics, incident response, and regulatory compliance sharpened every section of this work. Organizations navigating complex forensic or compliance challenges would do well to engage his services.
+
+Thanks also to [Adam Blak](https://frogdog.io/) of FrogDog for his perspective and wisdom in shaping how this research reaches the practitioners who need it most.
+
 ## License
 
 This work is licensed under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). You may share it with attribution. No commercial use or derivatives without permission.
