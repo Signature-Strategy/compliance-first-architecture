@@ -2,13 +2,11 @@
 
 **How Regulatory Convergence Shapes Processing Engine Architecture**
 
-Daniel Berry, Signature Strategy — March 2026 (v0.5-DRAFT)
+Daniel Berry — March 2026 (v0.5-DRAFT)
 
 ---
 
-Statutes and standards from five independent regulatory traditions — civil litigation, digital forensics, federal records management, financial services, and data privacy — converge on architectural patterns that are not apparent from engineering principles alone but make immediate sense in the context of the law. This paper identifies that convergence, defines the universal architectural patterns, and examines how compliance constraints shape each one.
-
-This is a design thesis, not a product specification; any implementation claiming conformance must be validated independently.
+Written from the perspective of a systems integrator working across multiple regulated sectors, this paper examines how statutes and standards from five independent regulatory traditions — civil litigation, digital forensics, federal records management, financial services, and data privacy — converge on the same architectural demands. Nine defensible architectural principles emerge from that convergence. These principles should be honored by any system that processes data under regulatory obligation, and the full paper provides the reasoning why.
 
 ## Read the Paper
 
@@ -21,4 +19,4 @@ The paper is published with [Hypothesis](https://web.hypothes.is/) annotation en
 
 ## License
 
-Copyright 2026 Signature Strategy, LLC. All rights reserved.
+This work is licensed under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). You may share it with attribution. No commercial use or derivatives without permission.
