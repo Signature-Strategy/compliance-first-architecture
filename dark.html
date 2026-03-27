@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="canonical" href="https://signature-strategy.github.io/compliance-first-architecture/dark.html"/>
 <title>Compliance-First Data Processing, Daniel Berry, Signature Strategy</title>
 <script src="https://hypothes.is/embed.js" async></script>
 <style>
 
 :root {
-
         --ex-cyan-400: #FF9425; --ex-cyan-500: #EF6A00; --ex-cyan-700: #FFB366;
         --ex-navy: #1A1F25; --ex-slate-800: #0F1318; --ex-slate-700: #1C2430;
         --ex-slate-600: #2A3545; --ex-slate-500: #64748B; --ex-slate-400: #94A3B8;
@@ -21,7 +21,6 @@
         --code-bg: #161B22; --code-border: #30363D; --code-fg: #FFB366;
         --h1-color: #FF9425; --h2-color: #E2E8F0; --h3-color: #C9D1D9;
         --h4-color: #94A3B8; --link-color: #FFB366;
-    
 }
 
 @page { size: A4; margin: 18mm 16mm 22mm 16mm;
@@ -71,7 +70,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
     <div class="doc-meta">
         <span class="author-name">Daniel Berry</span><br/>
         President &amp; Founder, Signature Strategy, LLC<br/><br/>
-        Version 0.6-DRAFT &bull; March 2026
+        Version 1.0 &bull; March 2026
     </div>
 </div>
 <h2 id="abstract">Abstract</h2>
@@ -250,10 +249,10 @@ A.3 (NARA, FRA, FOIA, CUI, FedRAMP)</li>
 A.4 (SEC 17a-4, FINRA, CFTC, MiFID II)</li>
 <li><strong>Privacy/GDPR</strong>: Sections 5, 11, and Appendix A.5
 (data minimization, cross-border, data subject rights)</li>
-<li><strong>AI-augmented pipelines</strong>: Sections 8, 9, and Appendix A.6
-(audit trail for AI decisions, Art. 22, reproducibility, model
-governance)</li>
 </ul>
+<p><strong>For AI-augmented pipelines</strong> (cross-cutting): Sections 8,
+9, and Appendix A.6 (audit trail for AI decisions, Art. 22,
+reproducibility, model governance)</p>
 
 <hr />
 <h2 id="the-problem-processing-as-a-black-box">1. The Problem:
@@ -287,9 +286,11 @@ adverse inferences and fee awards. While <em>Victor Stanley v. Creative
 Pipe</em> (250 F.R.D. 251, D. Md. 2008) addressed search methodology
 rather than processing architecture, Judge Grimm's finding illustrates
 the broader principle: counsel “did not sample the documents produced,
-the only prudent way to test the reliability of the keyword search.” In
-both cases, the failure was not in the tool; it was in the absence of
-self-verification.</p>
+the only prudent way to test the reliability of the keyword search.”
+The same reasoning applies to processing: if no one independently
+verifies that the engine extracted content correctly, the output is
+accepted on faith. In both cases, the failure was not in the tool; it
+was in the absence of self-verification.</p>
 <p><em>This paper is written from the perspective of a systems integrator
 working across multiple regulated sectors who observed this convergence
 in practice and wanted to understand it more rigorously. The
@@ -700,7 +701,8 @@ audited actions regardless of origin: system-generated actions
 (automated extraction, hashing, enrichment), human actions (operator
 configuration, mode selection, exception triage sign-off), and
 machine-assisted actions (AI classification decisions,
-confidence-threshold adjustments, model-driven routing). The
+confidence-threshold adjustments, model-driven routing; see Section 9
+and Appendix A.6.1 for detailed audit requirements). The
 distinction matters because a gap in any category undermines the
 completeness of the record.</p>
 <p>Both structures use <strong>append-only semantics</strong>: the
@@ -1005,17 +1007,17 @@ officer, not by the processing operator.</p>
 <tr>
 <td>5-algorithm hash set</td>
 <td>All 5 computed</td>
-<td>SHA-256 only (always)</td>
+<td>SHA-256 only</td>
 </tr>
 <tr>
 <td>Custody log</td>
 <td>Full (atomically committed)</td>
-<td>Lightweight (item ID, hash, timestamp) (always)</td>
+<td>Lightweight (item ID, hash, timestamp)</td>
 </tr>
 <tr>
 <td>Audit log</td>
 <td>Populated (per-deviation)</td>
-<td>Lightweight (exceptions and mode decisions) (always)</td>
+<td>Lightweight (exceptions and mode decisions)</td>
 </tr>
 <tr>
 <td>Compliance verification gate</td>
@@ -1025,22 +1027,22 @@ officer, not by the processing operator.</p>
 <tr>
 <td>Processing manifest</td>
 <td>Written</td>
-<td>Written (always)</td>
+<td>Written</td>
 </tr>
 <tr>
 <td>Failed stub records</td>
 <td>Created</td>
-<td>Created (always)</td>
+<td>Created</td>
 </tr>
 <tr>
 <td>No-silent-drops invariant</td>
 <td>Enforced</td>
-<td>Enforced (always)</td>
+<td>Enforced</td>
 </tr>
 <tr>
 <td>Operator authorization recorded</td>
 <td>Recorded</td>
-<td>Recorded (always)</td>
+<td>Recorded</td>
 </tr>
 </tbody>
 </table>
@@ -1761,7 +1763,7 @@ sufficient.</p>
 <li><strong>Independently constructed test corpora.</strong> Test files
 and expected results constructed with independence from the engine’s
 normal processing operations. Independence means the test corpus and
-expected results are not derived from the engine’s own output, they are
+expected results are not derived from the engine’s own output; they are
 created or validated through a separate methodology. This does not
 require a different developer; it requires a walled-off process where
 the expected results are established without reference to what the
@@ -2077,7 +2079,10 @@ the appropriate authority.</p>
 <em>Daubert</em> evaluates reliability independent of litigation history.
 TAR was novel when Judge Peck approved it in <em>Da Silva Moore</em>
 (287 F.R.D. 182, S.D.N.Y. 2012); within three years, <em>Rio Tinto</em>
-(306 F.R.D. 125, S.D.N.Y. 2015) declared it “black letter law.” Under
+(306 F.R.D. 125, S.D.N.Y. 2015) declared it “black letter law.” Those
+cases addressed review methodology, not processing architecture; the
+analogy is that Daubert evaluates the reliability of the method
+presented, not whether a court has previously blessed it. Under
 the December 2023 FRE 702 amendments, the proponent must show
 reliability by a preponderance, the compliance verification gate,
 three-rate error framework, and validation protocol provide the
@@ -2871,7 +2876,7 @@ authorizing provision. The legal basis analysis for the AI classification
 must be documented in the processing manifest alongside the legal basis
 for the extraction itself.</p>
 <p><strong>Post-SCHUFA: Art. 22(1) as default prohibition.</strong>
-Following CJEU C-634/21 (<em>SCHUFA Holding</em>, December 2023), the
+Following CJEU C-634/21 (<em>SCHUFA Holding</em>, December 7, 2023), the
 stronger view, now endorsed by the Court, is that Art. 22(1) operates
 as a general prohibition on solely automated decisions with legal or
 similarly significant effects, not merely a right the data subject must
@@ -3629,6 +3634,16 @@ documented in the revision history.</p>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>1.0</td>
+<td>2026-03-27</td>
+<td>Applied eight deferred panel findings: Section 10.2 comma splice,
+Section 6 mode table asymmetry, Section 1 Victor Stanley bridge,
+Section 9/A.6.3 SCHUFA date precision, Section 13 TAR/processing
+distinction, exec summary reader guide hierarchy, Section 5.3
+forward-reference, exec brief ISO 27037 qualifier. Version 1.0
+release.</td>
+</tr>
 <tr>
 <td>0.6</td>
 <td>2026-03-27</td>

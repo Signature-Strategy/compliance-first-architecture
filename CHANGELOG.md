@@ -7,6 +7,40 @@ from v0.1 through v0.5.
 
 ---
 
+## [v1.0] — 2026-03-27
+
+### Version 1.0 Release
+
+Eight deferred panel findings applied:
+- **Section 10.2**: Fixed comma splice in validation protocol item 1 (semicolon)
+- **Section 6 mode table**: Removed "(always)" qualifier asymmetry from
+  non-forensic column — the paragraph below already states seven features
+  cannot be toggled off
+- **Section 1**: Added bridge sentence connecting Victor Stanley search
+  methodology analogy to processing self-verification conclusion
+- **Exec Brief traditions table**: Added "(applied by analogy)" qualifier on
+  ISO 27037 for digital forensics row
+- **Section 9/A.6.3**: SCHUFA ruling date corrected to "December 7, 2023"
+- **Section 13**: Added distinguishing sentence — Da Silva Moore and Rio Tinto
+  addressed review methodology, not processing architecture; the analogy is
+  that Daubert evaluates reliability of the method presented
+- **Exec Summary reader guide**: AI-augmented pipelines entry separated from
+  five-tradition bulleted list to preserve visual hierarchy
+- **Section 5.3**: Added forward-reference to Section 9 and Appendix A.6.1
+  for machine-assisted actions audit requirements
+
+### Exec summary voice normalization
+- Removed inline citations from Principle #1 Why It Matters column
+- Rewrote #5–#9 for consistent active-verb, consequence-focused voice
+- Brief Principle #9 rewritten from citation-led to consequence-focused
+
+### Version bump
+- Version 1.0 across all files (cover pages, index, README)
+- Removed DRAFT label
+- Added PDF for GitHub release and SSRN submission
+
+---
+
 ## [`bc497d0`] — 2026-03-27
 
 ### Author's Note & AI Disclosure
