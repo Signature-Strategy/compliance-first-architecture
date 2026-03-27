@@ -7,7 +7,7 @@ from v0.1 through v0.5.
 
 ---
 
-## [`c21d60c`] — 2026-03-27
+## [`bc497d0`] — 2026-03-27
 
 ### Author's Note & AI Disclosure
 - **Expanded author's note** (Section 1): Replaced citation-only disclaimer
