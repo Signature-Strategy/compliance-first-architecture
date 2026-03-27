@@ -2,7 +2,7 @@
 
 **How Regulatory Convergence Shapes Processing Engine Architecture**
 
-Daniel Berry — March 2026 (v0.5-DRAFT)
+Daniel Berry — March 2026 (v0.6-DRAFT)
 
 ---
 
