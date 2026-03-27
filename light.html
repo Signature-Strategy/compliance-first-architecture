@@ -121,8 +121,8 @@ that will be worked around.</p>
 <td><strong>No silent drops</strong></td>
 <td>Every item encountered produces a database record, even if
 extraction fails</td>
-<td>A missing item is potential spoliation (FRCP 37(e)), a records
-violation (44 U.S.C. § 3314), or a gap in regulatory production</td>
+<td>A missing item is potential spoliation, a records violation, or a
+gap in regulatory production</td>
 </tr>
 <tr>
 <td>2</td>
@@ -130,8 +130,8 @@ violation (44 U.S.C. § 3314), or a gap in regulatory production</td>
 <td>Source files hashed before and after processing; every extracted
 item hashed (SHA-256 minimum; forensic mode adds MD5, SHA-1, SHA-512,
 SHA3-256 in a single pass); collection manifests compared</td>
-<td>Proves the engine did not alter source evidence <em>and</em> proves
-content integrity from extraction through production</td>
+<td>Proves the engine did not alter source evidence and proves content
+integrity from extraction through production</td>
 </tr>
 <tr>
 <td>3</td>
@@ -154,30 +154,31 @@ before anyone asks</td>
 <td><strong>Processing manifest</strong></td>
 <td>Per-run record of all parameters, software versions, operator, and
 outcomes</td>
-<td>The compliance artifact that proves what was done and how</td>
+<td>Proves what was done, how, and by whom; the primary compliance
+artifact for any run</td>
 </tr>
 <tr>
 <td>6</td>
 <td><strong>Content-addressed storage</strong></td>
 <td>Extracted binaries stored at hash-derived paths</td>
-<td>Automatic deduplication and tamper detection; integrity verifiable
-at any time</td>
+<td>Enables automatic deduplication and tamper detection; integrity
+verifiable at any time without reprocessing</td>
 </tr>
 <tr>
 <td>7</td>
 <td><strong>Automated verification</strong></td>
 <td>A compliance gate runs after every extraction and produces pass/fail
 results</td>
-<td>Self-assessment is necessary (though not sufficient, see Section
-10)</td>
+<td>Catches gaps before downstream consumers rely on the output;
+necessary but not sufficient (Section 10)</td>
 </tr>
 <tr>
 <td>8</td>
 <td><strong>Encrypted content handling</strong></td>
 <td>Encrypted items identified, categorized, and documented, not
 silently skipped</td>
-<td>”Encrypted” is not “Failed”; the distinction drives different triage
-workflows</td>
+<td>Distinguishes encryption from failure; drives different triage
+workflows and different legal responses</td>
 </tr>
 <tr>
 <td>9</td>
@@ -186,9 +187,9 @@ workflows</td>
 privilege screening) must record model identity, version, confidence,
 and threshold, with human oversight for consequential
 determinations</td>
-<td>Amended FRE 702, GDPR Art. 22, EU AI Act Art. 14, and NIST AI RMF
-independently require that algorithmic decisions in consequential
-contexts be transparent, auditable, and subject to human review</td>
+<td>Ensures algorithmic decisions are auditable, reproducible, and
+subject to human review; all five regulatory traditions independently
+require this</td>
 </tr>
 </tbody>
 </table>
