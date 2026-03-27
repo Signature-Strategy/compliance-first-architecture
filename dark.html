@@ -218,14 +218,14 @@ recording, and the processing manifest.</p>
 <p><strong>The architecture is validated through three independent
 mechanisms:</strong></p>
 <ul>
-<li><strong>Automated internal consistency checks</strong> (Section 5.6)
+<li><strong>Automated internal consistency checks</strong> (Section 5.6):
 the engine verifies its own records are complete and well-formed after
 every run.</li>
-<li><strong>A structured validation protocol</strong> (Section 10),
+<li><strong>A structured validation protocol</strong> (Section 10):
 cross-tool comparison, fidelity testing against golden manifests, and
 reproducibility testing provide independent verification that automated
 checks cannot.</li>
-<li><strong>A three-rate error framework</strong> (Section 10.3),
+<li><strong>A three-rate error framework</strong> (Section 10.3):
 distinguishes accounting errors (items lost), processing errors (items
 that failed), and fidelity errors (items extracted incorrectly), because
 a single “error rate” conflates failures with fundamentally different
@@ -563,9 +563,10 @@ handling, where the engine meets the outside world. <strong>Algorithmic
 transparency</strong> (Section 9): when processing decisions are made by
 probabilistic models rather than deterministic parsers, model
 provenance, decision rationale, confidence scores, and human oversight
-pathways must be recorded as first-class audit trail entries. All five
-regulatory traditions independently require this (Section 9); the
-regulatory sources are newer than those underlying patterns 1–8, but the
+pathways must be recorded as first-class audit trail entries. Section 9
+develops this pattern separately because the regulatory sources and
+convergence argument are distinct from patterns 1–8; those sources are
+newer, but all five traditions independently require it and the
 directional convergence is clear and accelerating.</p>
 <h3 id="the-no-silent-drops-invariant">5.1 The No-Silent-Drops
 Invariant</h3>
@@ -969,7 +970,10 @@ Full forensic documentation for routine supervisory review under FINRA
 3110, or for bulk migration of temporary federal records under GRS 6.1,
 could itself be challenged as disproportionate under FRCP 26(b)(1) and
 the Sedona <em>Commentary on Proportionality</em> (2017). Non-forensic
-mode exists for both categories.</p>
+mode exists for both categories. In either case, mode selection must be
+documented before processing begins, with the authorizing principal
+(counsel, compliance officer, or records officer) and the basis for the
+decision recorded in the processing manifest.</p>
 <p>The critical constraint is transparency: when non-forensic mode is
 selected, every artifact the engine produces, including logs, reports,
 reconciliation outputs, and the processing manifest, must unambiguously
@@ -1663,12 +1667,15 @@ transparency</td>
 </tr>
 <tr>
 <td>Non-determinism handling</td>
+<td>Daubert: methodology must be testable and yield consistent
+results</td>
+<td>ISO 27042: reproducibility requires documented variance</td>
 <td>—</td>
 <td>—</td>
-<td>—</td>
-<td>—</td>
-<td>—</td>
-<td>Stochastic models require variance documentation</td>
+<td>GDPR Art. 5(1)(a): transparency requires explainable
+outcomes</td>
+<td>Stochastic models require variance documentation, seed logging,
+and confidence interval reporting</td>
 </tr>
 </tbody>
 </table>
@@ -3275,7 +3282,7 @@ was not computed:</p>
 diversity</td>
 </tr>
 <tr>
-<td><strong>Standard / Performance</strong></td>
+<td><strong>Non-Forensic</strong></td>
 <td>SHA-256 only</td>
 <td>Minimum compliant configuration; content-addressed storage
 integrity</td>
@@ -3591,20 +3598,20 @@ the engine’s own audit trail.</p>
 <hr />
 <h2 id="acknowledgments">Acknowledgments</h2>
 <p>The author thanks Aidan Booth (Ashcroft Forensic Advisory) for
-detailed peer review and practitioner feedback across two review rounds,
-and for the third-round feedback that refined the non-forensic mode
-framing, verification independence language, and audit trail
-completeness definitions. The first round
-substantially improved the treatment of reprocessing semantics,
-collaboration suite data models, encounter-sequence mechanics, source
-hash ingestion, the phased extraction sequence, non-forensic mode rationale,
-and gate failure semantics in Sections 2, 3, 5, and 11. The second round
-strengthened the treatment of non-forensic-mode audit logging,
-pre-processing chain of custody, crash recovery mechanics, throughput at
-scale, parent-child relationships for early case assessment, timezone
-handling, foreign language translation, and validation methodology in
-Sections 6, 7, 8, and 10. Specific changes are documented in the revision
-history.</p>
+detailed peer review and practitioner feedback across three review
+rounds. The first round substantially improved the treatment of
+reprocessing semantics, collaboration suite data models,
+encounter-sequence mechanics, source hash ingestion, the phased
+extraction sequence, non-forensic mode rationale, and gate failure
+semantics in Sections 2, 3, 5, and 11. The second round strengthened
+the treatment of non-forensic-mode audit logging, pre-processing chain
+of custody, crash recovery mechanics, throughput at scale, parent-child
+relationships for early case assessment, timezone handling, foreign
+language translation, and validation methodology in Sections 6, 7, 8,
+and 10. The third round refined the non-forensic mode framing,
+verification independence language, audit trail completeness
+definitions, and chain of custody precision. Specific changes are
+documented in the revision history.</p>
 <hr />
 <h2 id="revision-history">Revision History</h2>
 <table>
