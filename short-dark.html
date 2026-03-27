@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Executive Brief &mdash; Compliance-First Data Processing</title>
+<title>Executive Brief, Compliance-First Data Processing</title>
 <script src="https://hypothes.is/embed.js" async></script>
 <style>
 
@@ -91,7 +91,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
 
 <p>Civil litigation, digital forensics, federal records management, financial services, and data privacy each arrive at this question through different statutes and different enforcement mechanisms. But when their requirements are mapped to processing engine architecture, they converge on the same set of demands.</p>
 
-<p>This convergence is not coincidental. Every tradition addresses the same fundamental problem: when data passes through a system, how do you prove nothing was lost, nothing was altered, integrity is intact, and the system&rsquo;s behavior is documented and reproducible?</p>
+<p>This convergence is not coincidental. Every tradition addresses the same fundamental problem: when data passes through a system, how do you prove nothing was lost, nothing was altered, chain of custody is intact, and the system&rsquo;s behavior is documented and reproducible?</p>
 
 <h2>What &ldquo;Compliance-First&rdquo; Means</h2>
 
@@ -100,7 +100,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
 <ol>
   <li>Every technical decision is evaluated against the governing standards before implementation.</li>
   <li>The engine&rsquo;s internal behavior is observable and auditable.</li>
-  <li>Verification is automated and runs on every extraction.</li>
+  <li>Verification is automated, independent, and runs on every extraction; the verification gate is architecturally firewalled from the processing pipeline and takes precedence where conflicts arise.</li>
 </ol>
 
 <p>The distinction between a processing engine that <em>happens</em> to be compliant and one <em>designed</em> for compliance is the distinction between luck and intent. Courts, regulators, records officers, and privacy authorities all evaluate intent.</p>
@@ -166,17 +166,17 @@ hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
 <tr>
 <td>7</td>
 <td><strong>Automated Compliance Verification</strong></td>
-<td>After every extraction, a compliance gate runs and produces pass/fail results. Self-assessment is necessary, though not sufficient &mdash; independent validation is also required.</td>
+<td>After every extraction, a compliance gate runs and produces pass/fail results. Self-assessment is necessary, though not sufficient; independent validation is also required.</td>
 </tr>
 <tr>
 <td>8</td>
 <td><strong>Encrypted Content Handling</strong></td>
-<td>&ldquo;Encrypted&rdquo; is not &ldquo;Failed.&rdquo; Encrypted items are identified, categorized by encryption type, and documented &mdash; not silently skipped. The distinction drives different triage workflows and different legal responses.</td>
+<td>&ldquo;Encrypted&rdquo; is not &ldquo;Failed.&rdquo; Encrypted items are identified, categorized by encryption type, and documented, not silently skipped. The distinction drives different triage workflows and different legal responses.</td>
 </tr>
 <tr>
 <td>9</td>
 <td><strong>Algorithmic Decision Transparency</strong></td>
-<td>When AI or machine-learning models assist classification, prioritization, privilege review, or relevance scoring, the engine must log which model was used, its version, the confidence score, and whether a human reviewed the output. Supports FRE 702 (expert testimony), GDPR Article 22 (automated decision-making), the EU AI Act Article 14 (human oversight), and NIST AI RMF governance expectations.</td>
+<td>When AI or machine-learning models assist classification, prioritization, privilege review, or relevance scoring, the engine must log which model was used, its version, the confidence score, and whether a human reviewed the output. All five traditions independently require this: FRE 702 and Daubert (civil litigation), ISO 27042 and SWGDE (digital forensics), OMB M-24-10 (federal records), SEC/FINRA supervisory requirements (financial services), and GDPR Article 22 (privacy), reinforced by the EU AI Act and NIST AI RMF.</td>
 </tr>
 </tbody>
 </table>
@@ -184,16 +184,16 @@ hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
 <p class="section-ref"><a href="dark.html#nine-defensible-principles">Full principle analysis &rarr; Section 5</a></p>
 
 <blockquote>
-<p><strong>These nine principles are necessary but not sufficient.</strong> They define the architectural foundation. An engine that implements all nine without the organizational process controls &mdash; legal hold enforcement, retention governance, operator qualification, exception triage with sign-off authority &mdash; has the infrastructure for compliance without the practice of it.</p>
+<p><strong>These nine principles are necessary but not sufficient.</strong> They define the architectural foundation. An engine that implements all nine without the organizational process controls (legal hold enforcement, retention governance, operator qualification, exception triage with sign-off authority) has the infrastructure for compliance without the practice of it.</p>
 </blockquote>
 
 <h2>Two Processing Modes</h2>
 
-<p>A compliance-first engine supports configurable processing rigor, not because compliance should be optional, but because <strong>proportionality demands it</strong>. Full forensic rigor for a $200,000 contract dispute could itself be challenged as disproportionate.</p>
+<p>A compliance-first engine supports configurable processing rigor because legitimate use cases exist where the data is not governed by the regulatory traditions in this paper, and because proportionality may justify reduced rigor even within regulated contexts. <strong>Non-forensic mode</strong> is for internal investigations, R&amp;D, data scanning, and other workflows where outputs are not subject to those obligations, or where a documented proportionality analysis supports the reduction.</p>
 
 <table>
 <thead>
-<tr><th>Capability</th><th>Forensic Mode</th><th>Standard Mode</th></tr>
+<tr><th>Capability</th><th>Forensic Mode</th><th>Non-Forensic Mode</th></tr>
 </thead>
 <tbody>
 <tr><td>Hash algorithms</td><td>All 5 (single pass)</td><td>SHA-256 only</td></tr>
@@ -205,7 +205,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
 
 <p><strong>Seven features cannot be disabled in either mode:</strong> no-silent-drops, SHA-256 hashing, failed stub records, a custody log, an audit log, operator authorization recording, and the processing manifest.</p>
 
-<p>When processing mode is reduced, every output must make that fact unambiguous. Mode selection for matters under litigation hold, regulatory obligation, or FOIA request should be made by counsel, compliance, or the records officer &mdash; not by the processing operator.</p>
+<p>When non-forensic mode is selected, every artifact, log, report, and reconciliation must indicate that forensic mode was off for that run. Mode selection for matters under litigation hold, regulatory obligation, or FOIA request should be made by counsel, compliance, or the records officer, not by the processing operator.</p>
 
 <p class="section-ref"><a href="dark.html#the-processing-mode-question">Full mode analysis &rarr; Section 6</a></p>
 
@@ -216,13 +216,13 @@ hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
 <p>The paper defines three independent validation mechanisms:</p>
 
 <ol>
-  <li><strong>Automated internal consistency checks</strong> &mdash; the engine verifies its own records after every run.</li>
-  <li><strong>A structured validation protocol</strong> &mdash; cross-tool comparison, fidelity testing against golden manifests, and reproducibility testing.</li>
+  <li><strong>Automated internal consistency checks</strong>, the engine verifies its own records after every run.</li>
+  <li><strong>A structured validation protocol</strong>, cross-tool comparison, fidelity testing against golden manifests, and reproducibility testing.</li>
   <li><strong>A three-rate error framework</strong> that distinguishes:
     <ul>
-      <li><strong>Accounting errors</strong> &mdash; items encountered but not recorded (target: zero)</li>
-      <li><strong>Processing errors</strong> &mdash; items recorded but not successfully extracted (inherent; reported per run)</li>
-      <li><strong>Fidelity errors</strong> &mdash; items extracted with incorrect content (hardest to measure, most legally significant)</li>
+      <li><strong>Accounting errors</strong>, items encountered but not recorded (target: zero)</li>
+      <li><strong>Processing errors</strong>, items recorded but not successfully extracted (inherent; reported per run)</li>
+      <li><strong>Fidelity errors</strong>, items extracted with incorrect content (hardest to measure, most legally significant)</li>
     </ul>
   </li>
 </ol>
@@ -233,7 +233,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
 
 <h2>The Goal</h2>
 
-<p>The goal is not perfection. No processing engine achieves zero failures across all data. The goal is <strong>defensibility</strong>: the ability to demonstrate, with evidence, that reasonable steps were taken, that every item was accounted for, that every failure was documented, and that the methodology is transparent, reproducible, validated, and aligned with the standards that govern the handling of electronically stored information &mdash; regardless of which regulatory tradition is asking.</p>
+<p>The goal is not perfection. No processing engine achieves zero failures across all data. The goal is <strong>defensibility</strong>: the ability to demonstrate, with evidence, that reasonable steps were taken, that every item was accounted for, that every failure was documented, and that the methodology is transparent, reproducible, validated, and aligned with the standards that govern the handling of electronically stored information, regardless of which regulatory tradition is asking.</p>
 
 <blockquote>
 <p>The full paper provides the complete regulatory analysis, convergence mapping, sector-specific requirements, security architecture, attack surface analysis, validation methodology, and five detailed appendices covering regulatory detail, fidelity taxonomy, hash algorithm selection, architectural specifications, and distributed deployment.</p>
@@ -241,7 +241,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
 </blockquote>
 
 <div class="footer">
-    <p>Daniel Berry &mdash; 2026</p>
+    <p>Daniel Berry, 2026</p>
     <p><a href="dark.html">Full paper (dark)</a> &middot; <a href="light.html">Full paper (light)</a> &middot; <a href="short-light.html">This brief (light)</a></p>
 </div>
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="canonical" href="https://signature-strategy.github.io/compliance-first-architecture/dark.html"/>
-<title>Compliance-First Data Processing &mdash; Daniel Berry, Signature Strategy</title>
+<title>Compliance-First Data Processing, Daniel Berry, Signature Strategy</title>
 <script src="https://hypothes.is/embed.js" async></script>
 <style>
 
@@ -74,9 +74,9 @@ hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
     </div>
 </div>
 <h2 id="abstract">Abstract</h2>
-<p>Statutes and standards from five independent regulatory traditions —
+<p>Statutes and standards from five independent regulatory traditions,
 civil litigation, digital forensics, federal records management,
-financial services, and data privacy — converge on architectural
+financial services, and data privacy, converge on architectural
 patterns that are not apparent from engineering principles alone but
 make immediate sense in the context of the law. This paper identifies
 that convergence, defines the universal architectural patterns, and
@@ -90,7 +90,7 @@ the same question of a data processing system: <em>can you account for
 every item you processed, and can you prove it?</em> Civil litigation,
 digital forensics, federal records management, financial services, and
 data privacy each arrive at that question through different statutes and
-different enforcement mechanisms — but when their requirements are
+different enforcement mechanisms; but when their requirements are
 mapped to processing engine architecture, they converge on nine
 universal patterns. Many are not apparent from engineering principles
 alone; they become obvious only when the legal and regulatory context is
@@ -168,13 +168,13 @@ at any time</td>
 <td><strong>Automated verification</strong></td>
 <td>A compliance gate runs after every extraction and produces pass/fail
 results</td>
-<td>Self-assessment is necessary (though not sufficient — see Section
+<td>Self-assessment is necessary (though not sufficient, see Section
 10)</td>
 </tr>
 <tr>
 <td>8</td>
 <td><strong>Encrypted content handling</strong></td>
-<td>Encrypted items identified, categorized, and documented — not
+<td>Encrypted items identified, categorized, and documented, not
 silently skipped</td>
 <td>”Encrypted” is not “Failed”; the distinction drives different triage
 workflows</td>
@@ -184,7 +184,7 @@ workflows</td>
 <td><strong>Algorithmic decision transparency</strong></td>
 <td>AI-assisted processing decisions (classification, translation,
 privilege screening) must record model identity, version, confidence,
-and threshold — with human oversight for consequential
+and threshold, with human oversight for consequential
 determinations</td>
 <td>Amended FRE 702, GDPR Art. 22, EU AI Act Art. 14, and NIST AI RMF
 independently require that algorithmic decisions in consequential
@@ -196,31 +196,35 @@ contexts be transparent, auditable, and subject to human review</td>
 sufficient.</strong> They define the architectural foundation; they do
 not constitute a conformance checklist. An engine that implements all
 nine without the organizational process controls described in Sections
-3, 10.5, and 11 — legal hold enforcement, retention governance, operator
-qualification, exception triage with sign-off authority — has the
+3, 10.5, and 11 (legal hold enforcement, retention governance, operator
+qualification, exception triage with sign-off authority) has the
 infrastructure for compliance without the practice of it. Practitioners
 must evaluate applicability to their specific regulatory context
 (Section 14).</p>
-<p><strong>Two processing modes</strong> balance rigor against
-proportionality: <strong>forensic mode</strong> (full audit trail,
+<p><strong>Two processing modes</strong> accommodate different rigor
+requirements: <strong>forensic mode</strong> (full audit trail,
 five-algorithm hashing, source integrity verification, per-deviation
-documentation) and <strong>standard mode</strong> (SHA-256 only,
-lightweight custody and audit logs, structural checks). Seven features
-cannot be disabled in either mode: no-silent-drops, SHA-256 hashing,
-failed stub records, a custody log, an audit log (at minimum covering
-exceptions and mode decisions), operator authorization recording, and
-the processing manifest.</p>
+documentation) and <strong>non-forensic mode</strong> (SHA-256 only,
+lightweight custody and audit logs, structural checks) for workflows
+where data is not subject to the regulatory traditions in this paper, or
+where proportionality analysis supports reduced rigor within a regulated
+context. When non-forensic mode is selected, every artifact, log, report,
+and reconciliation must indicate that forensic mode was off for that run.
+Seven features cannot be disabled in either mode: no-silent-drops,
+SHA-256 hashing, failed stub records, a custody log, an audit log (at
+minimum covering exceptions and mode decisions), operator authorization
+recording, and the processing manifest.</p>
 <p><strong>The architecture is validated through three independent
 mechanisms:</strong></p>
 <ul>
 <li><strong>Automated internal consistency checks</strong> (Section 5.6)
-— the engine verifies its own records are complete and well-formed after
+the engine verifies its own records are complete and well-formed after
 every run.</li>
-<li><strong>A structured validation protocol</strong> (Section 10) —
+<li><strong>A structured validation protocol</strong> (Section 10),
 cross-tool comparison, fidelity testing against golden manifests, and
 reproducibility testing provide independent verification that automated
 checks cannot.</li>
-<li><strong>A three-rate error framework</strong> (Section 10.3) —
+<li><strong>A three-rate error framework</strong> (Section 10.3),
 distinguishes accounting errors (items lost), processing errors (items
 that failed), and fidelity errors (items extracted incorrectly), because
 a single “error rate” conflates failures with fundamentally different
@@ -230,7 +234,7 @@ causes, consequences, and remediation paths.</li>
 architectural foundation is substantial enough that an engine built to
 the universal set is well-positioned for any individual tradition. The
 sector-specific delta is primarily configuration, labeling, and output
-format — though some traditions (notably privacy) introduce requirements
+format, though some traditions (notably privacy) introduce requirements
 that are architectural in their own right.</p>
 <p><strong>For sector-specific readers:</strong></p>
 <ul>
@@ -275,8 +279,8 @@ identified or are misclassified as benign.” An exception report that no
 one reads is not a compliance artifact; it is a liability. The
 consequences of this opacity are not hypothetical. In <em>DR Distributors
 v. 21 Century Smoking</em> (N.D. Ill. 2021), systematic ESI processing
-and production failures — including incomplete collection, inadequate
-search methodology, and false certifications — led to sanctions including
+and production failures, including incomplete collection, inadequate
+search methodology, and false certifications, led to sanctions including
 adverse inferences and fee awards. While <em>Victor Stanley v. Creative
 Pipe</em> (250 F.R.D. 251, D. Md. 2008) addressed search methodology
 rather than processing architecture, Judge Grimm's finding illustrates
@@ -284,10 +288,14 @@ the broader principle: counsel “did not sample the documents produced,
 the only prudent way to test the reliability of the keyword search.” In
 both cases, the failure was not in the tool; it was in the absence of
 self-verification.</p>
-<p><em>Note: Citation of published work by named commentators throughout
-this paper reflects the author’s analysis of publicly available
-materials. It does not imply endorsement by those individuals of this
-paper’s conclusions.</em></p>
+<p><em>This paper is written from the perspective of a systems integrator
+working across multiple regulated sectors who observed this convergence
+in practice and wanted to understand it more rigorously. The
+architectural thesis, the nine principles, and the conclusions drawn
+from cross-sector analysis are the author’s own assertions. Citation
+of published work by named commentators reflects the author’s analysis
+of publicly available materials and does not imply endorsement by those
+individuals of this paper’s conclusions.</em></p>
 <p>Every regulator, court, records officer, and privacy authority asks
 the same question: <strong>“Can you account for every item you
 processed, and can you prove it?”</strong></p>
@@ -312,13 +320,17 @@ every deviation produces an audit record. Both are queryable alongside
 the item records themselves (Section 5.3). The risk that these records
 are “forgotten soon after they’re identified” is real; the mitigation is
 procedural (Section 10.5).</p></li>
-<li><p><strong>Verification is automated and runs on every
+<li><p><strong>Verification is automated, independent, and runs on every
 extraction.</strong> Compliance is verified programmatically by a gate
 that runs the same checks every time, stores results alongside the data,
-and produces a machine-readable pass/fail attestation. This gate is a
-self-assessment: it confirms the engine’s own records are internally
-consistent, not that extraction was correct. Independent validation
-requires the protocol in Section 10.</p></li>
+and produces a machine-readable pass/fail attestation. This gate
+operates as a segregated verification component, architecturally
+firewalled from the processing pipeline so that its results are
+established by independent means. Where any conflict arises between the
+processing output and the verification gate’s findings, the verification
+gate is the source of truth and takes precedence. The gate is a
+self-assessment of internal consistency; independent validation of
+extraction correctness requires the protocol in Section 10.</p></li>
 </ol>
 <hr />
 <h2 id="the-scope-boundary">3. The Scope Boundary</h2>
@@ -350,7 +362,7 @@ and disposition for data within its scope. Legal holds are not unique to
 litigation: financial regulators issue examination holds (FINRA 8210),
 records managers impose transfer holds pending NARA review, and privacy
 authorities may require processing restrictions under GDPR Art. 18. The
-engine does not <em>issue</em> holds — that is a legal function — but it
+engine does not <em>issue</em> holds, that is a legal function; but it
 must <em>enforce</em> them.</p>
 <p><strong>Minimum architectural requirements:</strong></p>
 <ul>
@@ -371,7 +383,7 @@ hold criteria after the fact. Mid-run hold arrivals must also be
 recorded in the processing manifest.</li>
 <li><strong>Log hold release</strong> as an affirmative action
 (releasing authority, date, hold identifier). Items under multiple holds
-remain held until all are released — the engine must track per-item hold
+remain held until all are released, the engine must track per-item hold
 references, not a single binary flag.</li>
 <li><strong>Surface cross-regime conflicts.</strong> A single item may
 be subject to a litigation hold (preservation), an Art. 18 restriction
@@ -388,8 +400,8 @@ to support retention is broader: retained data simultaneously represents
 value, risk, and cost, and every sector faces this calculus. An engine
 that provides no mechanism for schedule-driven retention, hold-aware
 disposition, and auditable deletion forces organizations into
-indefensible manual workarounds. The universal patterns — particularly
-the processing manifest, audit trail, and cryptographic integrity —
+indefensible manual workarounds. The universal patterns, particularly
+the processing manifest, audit trail, and cryptographic integrity,
 provide the infrastructure that retention policies depend on; the
 policies themselves remain an organizational responsibility.</p>
 <p>The processing engine’s scope boundary is not a design limitation; it
@@ -406,7 +418,7 @@ threshold choice as a limitation).</p>
 <p><strong>Scope notes.</strong> This mapping is the author’s analytical
 synthesis, not a formal crosswalk endorsed by any standards body.
 Retention and disposition are excluded by the three-of-five threshold
-but remain architecturally significant — addressed at the scope boundary
+but remain architecturally significant, addressed at the scope boundary
 (Section 3). For financial services and federal records practitioners,
 retention carries equivalent architectural weight to the universal
 patterns; the exclusion reflects the threshold, not the importance.</p>
@@ -497,39 +509,38 @@ patterns; the exclusion reflects the threshold, not the importance.</p>
 </tr>
 <tr>
 <td>Algorithmic decision transparency</td>
-<td>FRE 702 (amended Dec 2023) — reliable application burden on
+<td>FRE 702 (amended Dec 2023), reliable application burden on
 proponent</td>
-<td>ISO 27042 — tool validation; SWGDE — audit trail of all
+<td>ISO 27042, tool validation; SWGDE, audit trail of all
 processes</td>
-<td>OMB M-24-10 — AI transparency; NARA — human review of automated
+<td>OMB M-24-10, AI transparency; NARA, human review of automated
 categorization</td>
-<td>SEC AI guidance — model risk management; FINRA — supervisory
+<td>SEC AI guidance, model risk management; FINRA, supervisory
 review</td>
-<td>GDPR Art. 22 — prohibition on solely automated consequential decisions; Art. 5(2) —
+<td>GDPR Art. 22, prohibition on solely automated consequential decisions; Art. 5(2),
 accountability</td>
 </tr>
 </tbody>
 </table>
 <p>The convergence is not coincidental. Every tradition addresses the
 same fundamental problem: when data passes through a system, how do you
-prove nothing was lost, nothing was altered, integrity is intact, and
+prove nothing was lost, nothing was altered, chain of custody is intact, and
 the system’s behavior is documented and reproducible?</p>
 <p>The table rows do not map 1:1 to Section 5. Some rows merge into a
 single pattern (e.g., “account for every item” and “failed item
 recording” are both enforced by Section 5.1’s stub records); some
 patterns span multiple rows (cryptographic integrity covers 5.2 and
 5.7). “Reproducibility” is a system-level property addressed in Section
-10. The ninth row — algorithmic decision transparency — is developed
-fully in Section 9.</p>
+10. Algorithmic decision transparency is developed in Section 9.</p>
 <blockquote>
 <p><strong>Reading the table.</strong> * ISO 27037 is normatively scoped
 to evidence collection, not processing; “by analogy” cells extend its
-principles to processing — ISO 27042 and SWGDE address processing
+principles to processing, ISO 27042 and SWGDE address processing
 directly (Appendix A.2). † The requirements are not identical across
 traditions: “account for every item” means something different under
 FRCP 37(e) (a sanctions provision) than under GDPR Art. 5(2)
-(accountability). The architectural response — a record for every item
-encountered — satisfies the core of each; sector-specific requirements
+(accountability). The architectural response, a record for every item
+encountered, satisfies the core of each; sector-specific requirements
 layer on top (Section 11).</p>
 </blockquote>
 <hr />
@@ -537,20 +548,24 @@ layer on top (Section 11).</p>
 Patterns</h2>
 <p>The standards in Section 4 converge on the following architectural
 patterns. Each represents a design constraint that multiple regulatory
-traditions independently require. They are presented here as patterns —
-recurring structural requirements that emerge from the convergence — not
+traditions independently require. They are presented here as patterns,
+recurring structural requirements that emerge from the convergence, not
 as an implementation specification for any particular system.</p>
-<p>The nine patterns divide into three groups. <strong>Data
-integrity</strong> (5.1–5.2): every item recorded, every hash computed —
+<p>The nine patterns divide into four groups. <strong>Data
+integrity</strong> (5.1–5.2): every item recorded, every hash computed,
 the foundation that prevents silent data loss. <strong>Accountability</strong>
 (5.3–5.6): chain of custody, processing manifests, content-addressed
-storage, and automated verification — the audit infrastructure that
+storage, and automated verification, the audit infrastructure that
 makes processing defensible. <strong>Boundary handling</strong>
 (5.7–5.8): source integrity verification and encrypted content
-handling — where the engine meets the outside world. The ninth pattern,
-algorithmic decision transparency, is developed separately in Section 9
-because its regulatory basis spans a distinct set of emerging
-authorities.</p>
+handling, where the engine meets the outside world. <strong>Algorithmic
+transparency</strong> (Section 9): when processing decisions are made by
+probabilistic models rather than deterministic parsers, model
+provenance, decision rationale, confidence scores, and human oversight
+pathways must be recorded as first-class audit trail entries. All five
+regulatory traditions independently require this (Section 9); the
+regulatory sources are newer than those underlying patterns 1–8, but the
+directional convergence is clear and accelerating.</p>
 <h3 id="the-no-silent-drops-invariant">5.1 The No-Silent-Drops
 Invariant</h3>
 <p><strong>Every item the engine encounters must produce a database
@@ -569,7 +584,7 @@ will. Empirical verification requires the validation protocol in Section
 additional resources. The engine links the new record to the original
 stub via a source-derived natural key (source file path,
 container-relative path, extraction depth) without overwriting the
-original — append-only semantics apply. Reprocessing mechanics are
+original, append-only semantics apply. Reprocessing mechanics are
 detailed in Appendix D.</p>
 <p><strong>Scope note on collection.</strong> This paper assumes data
 has been successfully collected and is available as source files or
@@ -591,7 +606,7 @@ workflow is typically defined in the parties' ESI protocol (FRCP
 16(b)/26(f)) and operationalized through the FRCP 26(b)(5)(B) clawback
 mechanism. FRE 502(d) provides the complementary protection: a court
 order preventing subject-matter privilege waiver from inadvertent
-production — it is the legal shield, not the technical instruction to the
+production, it is the legal shield, not the technical instruction to the
 engine. Clawback-triggered re-sequestration uses source-derived
 deduplication keys without reprocessing the full collection. The
 privilege review queue is subject to the same no-silent-drops invariant.
@@ -638,8 +653,8 @@ integrity hash</td>
 <td>Weakened (Stevens et al., “SHAttered,” 2017; chosen-prefix collision
 by Leurent &amp; Peyrin, 2019). The distinction matters: SHA-1's
 <em>collision resistance</em> is broken (an attacker can construct new
-colliding files), but <em>preimage resistance</em> — relevant to
-already-collected evidence where the source bytes are fixed — remains
+colliding files), but <em>preimage resistance</em>, relevant to
+already-collected evidence where the source bytes are fixed, remains
 intact. SHA-1 should not be specified for new deployments; it is
 retained solely for interoperability with legacy forensic
 toolchains</td>
@@ -647,7 +662,7 @@ toolchains</td>
 <tr>
 <td><strong>SHA3-256</strong></td>
 <td>Algorithmic diversity</td>
-<td>FIPS 202 (2015). Keccak sponge construction — a different
+<td>FIPS 202 (2015). Keccak sponge construction, a different
 cryptographic family from Merkle-Damgård (MD5/SHA-1/SHA-256/SHA-512).
 Provides a hedge against structural attacks on the SHA-2 family. Not yet
 widely adopted in forensic toolchains as of 2026, but positioned as the
@@ -663,7 +678,7 @@ diversity hedge.</strong></p>
 additional I/O cost (Appendix C details the architecture and
 per-algorithm throughput characteristics). The pipeline is I/O-bound
 regardless of how many digests are computed; the marginal CPU cost of
-additional algorithms is absorbed within I/O wait time. Standard mode
+additional algorithms is absorbed within I/O wait time. Non-forensic mode
 computes SHA-256 only.</p>
 <p>Algorithm selection must be configurable: per NIST SP 800-131A for
 federal CUI systems, and using FIPS 140-2/3 validated cryptographic
@@ -677,14 +692,21 @@ identifier, dependency manifest), a logical encounter-sequence number,
 the timestamp, and the item’s SHA-256 hash. The <strong>audit
 log</strong> records processing decisions for every item that deviated
 from normal success: failures, unsupported types, duplicates, encrypted
-items, items requiring OCR.</p>
+items, items requiring OCR. The audit trail must capture all
+audited actions regardless of origin: system-generated actions
+(automated extraction, hashing, enrichment), human actions (operator
+configuration, mode selection, exception triage sign-off), and
+machine-assisted actions (AI classification decisions,
+confidence-threshold adjustments, model-driven routing). The
+distinction matters because a gap in any category undermines the
+completeness of the record.</p>
 <p>Both structures use <strong>append-only semantics</strong>: the
 engine’s database account holds INSERT privileges only on these tables
 (no UPDATE, DELETE, or TRUNCATE). Reprocessing (Section 5.1) inserts new
 entries rather than updating existing ones; the full history is
 preserved.</p>
 <p>Append-only SQL permissions are necessary but not sufficient tamper
-evidence — a privileged DBA can bypass them. For stronger guarantees,
+evidence, a privileged DBA can bypass them. For stronger guarantees,
 the secure logging literature (Schneier &amp; Kelsey 1999, Crosby &amp;
 Wallach 2009, RFC 6962) provides proven approaches to cryptographic
 chaining and external attestation. For regulated environments (SEC
@@ -696,7 +718,7 @@ audit log entry (if applicable) in a single transaction, eliminating any
 window in which an item exists without its custody record. Where
 per-item transactional overhead is a throughput constraint, a
 WAL-journaled staging table flushed every N seconds is an acceptable
-trade-off — but not a compliance-equivalent alternative. The exposure
+trade-off; but not a compliance-equivalent alternative. The exposure
 window’s duration and justification must be recorded in the processing
 manifest. Crash recovery implications are addressed in Section 7.2.</p>
 <h4 id="encounter-sequence-numbers">5.3.1 Encounter-Sequence
@@ -704,12 +726,12 @@ Numbers</h4>
 <p>In plain terms: the engine assigns a unique, ordered number to every
 item it discovers, before processing begins, so that a forensic examiner
 can later reconstruct exactly what the engine saw and in what order.
-Timestamps alone are insufficient in concurrent architectures —
+Timestamps alone are insufficient in concurrent architectures,
 wall-clock times are subject to resolution limits, clock adjustments,
 and scheduling non-determinism. This is a recommended architectural
 practice, not a regulatory mandate.</p>
 <p>The compliance value is twofold. First, the sequence provides an
-ordering independent of database commit timing — the ordering a forensic
+ordering independent of database commit timing, the ordering a forensic
 examiner needs when reconstructing what the engine did. Second, it
 enables <strong>completeness auditing</strong>: if the highest committed
 sequence is N and there are N records (less documented gaps), the
@@ -743,7 +765,7 @@ rendering may be produced alongside it, but the machine-readable form is
 the compliance artifact.</p>
 <h4 id="configuration-validation">Configuration Validation</h4>
 <p>The engine should validate its configuration before extraction begins
-and flag suspicious settings: standard mode for litigation-hold matters,
+and flag suspicious settings: non-forensic mode for litigation-hold matters,
 zero items matching a date filter, custodian lists that differ from a
 prior run. Warnings are recorded in the processing manifest and surfaced
 in the compliance verification gate. Appendix D details the validation
@@ -773,7 +795,7 @@ addressed in Appendix E.</p>
 collision probability, anomaly detection) and storage-layer failure
 modes (disk full, bit rot, multi-volume coordination) are detailed in
 Appendix D. The key invariant: no storage failure may cause an item
-record to be lost — the item is recorded with a diagnostic status
+record to be lost, the item is recorded with a diagnostic status
 enabling targeted re-extraction.</p>
 <h3 id="automated-compliance-verification">5.6 Automated Compliance
 Verification</h3>
@@ -848,17 +870,17 @@ item records missing their CAS binary)</td>
 </tr>
 </tbody>
 </table>
-<p>In standard mode, per-deviation audit log checks are reduced in scope
-(Section 6): standard mode retains no-silent-drops, stub records, the
+<p>In non-forensic mode, per-deviation audit log checks are reduced in scope
+(Section 6): non-forensic mode retains no-silent-drops, stub records, the
 processing manifest, a lightweight custody log (item ID, hash,
 timestamp), and a lightweight audit log covering exceptions and mode
-decisions. The granular per-deviation audit trail is omitted —
+decisions. The granular per-deviation audit trail is omitted,
 proportionality justifies the reduction, but a complete absence of audit
-logging would leave standard-mode runs indefensible. The processing
+logging would leave non-forensic-mode runs indefensible. The processing
 manifest carries the records-of-processing-activities burden (including
 GDPR Art. 30 where applicable).</p>
 <p>The first twelve checks are <strong>internal consistency
-checks</strong> — they confirm the engine’s own records are complete and
+checks</strong>, they confirm the engine’s own records are complete and
 well-formed. They do not verify extraction correctness or confirm
 compliance with any external standard; that requires the validation
 protocol in Section 10. The thirteenth check (extraction stability) uses
@@ -895,7 +917,7 @@ documentation of what it does not.</p>
 <h4 id="response-to-integrity-mismatch">Response to Integrity
 Mismatch</h4>
 <p>A mismatch is a critical integrity event. The response varies by
-source environment type (forensic, enterprise, uncontrolled) — from
+source environment type (forensic, enterprise, uncontrolled), from
 halting the affected source in forensic contexts to flagging and
 continuing in enterprise contexts. The environment type is a required
 configuration parameter set at job creation, not inferred at runtime.
@@ -912,13 +934,13 @@ data is preserved), but the failure to <em>identify and document</em>
 encrypted items can undermine the completeness of a production.</p>
 <h4 id="encryption-detection">Encryption Detection</h4>
 <p>The engine must distinguish encrypted content from corrupted content
-and unsupported formats — the legal implications differ (encrypted items
+and unsupported formats, the legal implications differ (encrypted items
 may be decryptable; corrupted items are permanently inaccessible). False
 positives should be handled conservatively: flag and record the
 detection method. The engine should acknowledge the risk of false
 negatives (some encryption is indistinguishable from random data).</p>
 <h4 id="status-taxonomy">Status Taxonomy</h4>
-<p>Encrypted items receive a distinct status — “Encrypted” is not
+<p>Encrypted items receive a distinct status, “Encrypted” is not
 “Failed.” Failed items indicate engine or format issues; encrypted items
 indicate a credential gap requiring a business decision. The processing
 manifest records encrypted item counts separately.</p>
@@ -936,18 +958,30 @@ management implementation details are in Appendix D.</p>
 <h2 id="the-processing-mode-question">6. The Processing Mode
 Question</h2>
 <p>A compliance-first engine should support configurable processing
-rigor, not because compliance should be optional, but because
-proportionality demands it. Full forensic rigor for a $200,000 contract
-dispute could itself be challenged as disproportionate under FRCP
-26(b)(1) and the Sedona <em>Commentary on Proportionality</em>
-(2017).</p>
-<p>Legitimate use cases exist where forensic documentation is
-unnecessary: data migration, development testing, exploratory assessment.
-Some regulatory traditions — notably the Federal Records Act — impose
-affirmative obligations not subject to the same proportionality analysis;
-mode selection for federal records processing should default to forensic
-mode absent documented justification approved by the records
-officer.</p>
+rigor for two reasons. First, legitimate use cases exist where the data
+being processed is not governed by any of the regulatory traditions
+analyzed in this paper: internal investigations, data scanning for
+research and development, exploratory assessment, and similar workflows
+may not require forensic-grade documentation. Second, even within
+regulated contexts, proportionality may justify reduced rigor.
+Full forensic documentation for routine supervisory review under FINRA
+3110, or for bulk migration of temporary federal records under GRS 6.1,
+could itself be challenged as disproportionate under FRCP 26(b)(1) and
+the Sedona <em>Commentary on Proportionality</em> (2017). Non-forensic
+mode exists for both categories.</p>
+<p>The critical constraint is transparency: when non-forensic mode is
+selected, every artifact the engine produces, including logs, reports,
+reconciliation outputs, and the processing manifest, must unambiguously
+indicate that forensic mode was off for that run. An output that does not
+disclose its processing mode is worse than an output processed at reduced
+rigor, because it cannot be evaluated by anyone downstream.</p>
+<p>Some regulatory traditions, notably the Federal Records Act, impose
+affirmative obligations not subject to proportionality analysis; mode
+selection for federal records processing should default to forensic mode
+absent documented justification approved by the records officer. For
+matters under litigation hold, regulatory obligation, or FOIA request,
+mode selection should be made by counsel, compliance, or the records
+officer, not by the processing operator.</p>
 <table>
 <colgroup>
 <col style="width: 33%" />
@@ -958,7 +992,7 @@ officer.</p>
 <tr>
 <th>Feature</th>
 <th>Forensic Mode</th>
-<th>Standard Mode</th>
+<th>Non-Forensic Mode</th>
 </tr>
 </thead>
 <tbody>
@@ -1011,22 +1045,21 @@ operator authorization recording, and the processing manifest. An item
 without any custody record is a gap in the chain regardless of
 processing mode; a processing run without any audit trail for exceptions
 is indefensible regardless of proportionality context.</p>
-<p><strong>Transparency is non-negotiable.</strong> When processing mode
-is reduced, every output must make that fact unambiguous. The processing
-manifest records the mode, the reasoning, and who authorized the
-selection. For matters under litigation hold, regulatory obligation, or
-FOIA request, mode selection should be made by counsel, compliance, or
-the records officer, not by the processing operator. The mode selection
-documentation should include a proportionality analysis under FRCP
-26(b)(1) with reference to case-specific factors — amount in
-controversy, nature of claims, resources, burden — not merely a
-recorded choice. This is not merely a documentation concern;
-unauthorized mode reduction can constitute an independent supervisory
-failure under regulations such as FINRA Rule 3110.</p>
+<p><strong>Transparency is non-negotiable.</strong> When non-forensic mode
+is selected, every artifact the engine produces, including logs, reports,
+reconciliation outputs, and the processing manifest, must unambiguously
+indicate that forensic mode was off for that run. The processing manifest
+records the mode, the reasoning, and who authorized the selection. For
+matters under litigation hold, regulatory obligation, or FOIA request,
+mode selection should be made by counsel, compliance, or the records
+officer, not by the processing operator. This is not merely a
+documentation concern; unauthorized mode reduction can constitute an
+independent supervisory failure under regulations such as FINRA Rule
+3110.</p>
 <h4>Audit Log Event Categories by Mode</h4>
 <table>
 <thead>
-<tr><th>Event Category</th><th>Forensic Mode</th><th>Standard Mode</th></tr>
+<tr><th>Event Category</th><th>Forensic Mode</th><th>Non-Forensic Mode</th></tr>
 </thead>
 <tbody>
 <tr><td>Processing start/stop</td><td>Logged with operator, config hash, software version</td><td>Same</td></tr>
@@ -1038,11 +1071,11 @@ failure under regulations such as FINRA Rule 3110.</p>
 <tr><td>Checkpoint commits</td><td>Checkpoint ID, item range, commit timestamp, duration</td><td>Checkpoint ID and commit timestamp only</td></tr>
 </tbody>
 </table>
-<p>The standard-mode audit log is proportional in the sense defined by
+<p>The non-forensic-mode audit log is proportional in the sense defined by
 FRCP Rule 26(b)(1): it captures enough to reconstruct the processing
 run and identify who did what, without the per-item granularity that
 forensic mode provides. Both tiers use append-only storage with
-cryptographic chaining where deployed (Section 5.3 — required for
+cryptographic chaining where deployed (Section 5.3, required for
 regulated environments; recommended best practice otherwise) to prevent
 post-hoc modification.</p>
 <hr />
@@ -1082,14 +1115,14 @@ preserves the chain of custody but does not deliver extracted content
 Normalization</h4>
 <p>The bounded-memory requirement applies to the processing engine’s
 extraction pipeline. In practice, source data often arrives after
-upstream transformations — decompression, format conversion, container
-expansion, or normalization by collection tools — that are outside the
+upstream transformations, decompression, format conversion, container
+expansion, or normalization by collection tools, that are outside the
 engine’s processing boundary (Section 3). These transformations do not
 relieve the engine of its compliance obligations; they add to them. The
 engine must ingest transformation metadata from upstream tools (what was
 done, by what software and version, with what hashes before and after)
 to maintain chain of custody across the full pipeline. Where upstream
-metadata is unavailable, the engine documents the gap — the absence is
+metadata is unavailable, the engine documents the gap, the absence is
 itself a custody record. The processing boundary (Section 3) defines
 what the engine controls; chain of custody obligations extend to
 documenting what enters the boundary and the condition in which it
@@ -1116,13 +1149,13 @@ reconcile overlap. Content-addressed storage simplifies reconciliation:
 re-extraction of the same content resolves to the same binary path.</p>
 <h4 id="checkpoint-overhead">Checkpoint Overhead</h4>
 <p>Checkpointing writes metadata (source-file completion markers,
-encounter-sequence watermarks, batch boundaries) — not content. The
+encounter-sequence watermarks, batch boundaries), not content. The
 overhead is bounded and does not require re-reading extracted content.
 This matters for the stakeholder concern that compliance machinery
 degrades throughput: checkpointing is a metadata-only operation whose
 cost is proportional to batch count, not data volume.</p>
 <p>The deduplication key must be source-derived (source file path,
-container-relative path, extraction depth) — not content-hash-derived —
+container-relative path, extraction depth), not content-hash-derived,
 because text extraction non-determinism can produce different output
 from the same source bytes. The processing manifest records each run
 segment, any crash events, and the estimated uncommitted window.
@@ -1135,7 +1168,7 @@ deeply nested containers, megabyte-length filenames, malformed headers,
 encoding mismatches, and corrupted structures. Whether these arise from
 deliberate adversarial action or from the natural entropy of enterprise
 data, the architectural response is the same: every item that exceeds a
-resource limit is recorded with an appropriate status — never silently
+resource limit is recorded with an appropriate status, never silently
 dropped, never allowed to crash the engine.</p>
 <p>Six defensive mechanisms (recursion depth limits, decompression ratio
 limits, per-item memory limits, extraction timeouts, filename handling,
@@ -1160,7 +1193,7 @@ across nodes). Multi-terabyte frequently exceeds single-engine
 throughput within acceptable time windows; the distributed patterns in
 Section 7.5 apply at this tier, not only at petabyte scale.</p>
 <p><strong>Compliance overhead is unlikely to be the bottleneck for
-architectures that batch metadata writes</strong> — with an important
+architectures that batch metadata writes</strong>, with an important
 caveat. SHA-256 on modern hardware (with SHA-NI) exceeds 2 GB/s per
 core; five-hash forensic mode amortizes I/O cost in a single streaming
 pass. Custody log and audit trail writes are batch-insertable metadata
@@ -1168,8 +1201,8 @@ operations, dwarfed by the cost of parsing complex containers. This
 holds for I/O-bound workloads (large files, nested archives).</p>
 <p>However, modern ESI collections increasingly consist of millions of small items
 (Teams messages, Slack JSON, collaboration suite exports) where per-item
-overhead — custody logging, hash initialization, encounter-sequence
-assignment, database inserts — dominates over hash computation. The
+overhead, custody logging, hash initialization, encounter-sequence
+assignment, database inserts, dominates over hash computation. The
 "unlikely to be a bottleneck" claim assumes well-formed, I/O-bound
 inputs; Section 7.3 addresses where that assumption collapses.</p>
 <h4 id="workload-profiles">Workload Profiles</h4>
@@ -1179,11 +1212,11 @@ items such as chat messages or metadata-heavy records) may expose
 per-item overhead in custody logging and hash initialization. Batching
 strategies (committing custody records in hundreds, pooling hash
 contexts per source container) keep compliance overhead proportional.
-Recursive container extraction — the most expensive operation in most
-pipelines — is inherent to the data, not compliance overhead.</p>
+Recursive container extraction, the most expensive operation in most
+pipelines, is inherent to the data, not compliance overhead.</p>
 <h4 id="processing-prioritization">Processing Prioritization</h4>
 <p>In litigation and investigation contexts, counsel frequently directs
-processing order based on ESI protocol obligations — key custodians
+processing order based on ESI protocol obligations, key custodians
 first, date-range-prioritized, or source-system-prioritized. The engine
 should support priority-ordered source intake (custodian-first,
 date-range-first, or protocol-defined ordering) without compromising
@@ -1193,9 +1226,9 @@ priority-driven ordering while maintaining its monotonicity
 invariant.</p>
 <p>When multiple operators are working on the same matter, the risk of
 miscommunication is real and consequential. Real-time dashboarding with
-role-appropriate views — project managers seeing progress and ETAs,
+role-appropriate views, project managers seeing progress and ETAs,
 operators seeing queue depth and errors, legal counsel seeing custodian
-completion status — reduces this risk. A processing error caused by
+completion status, reduces this risk. A processing error caused by
 operator miscommunication is no less a processing error because its root
 cause was organizational.</p>
 <h4 id="operational-visibility">Operational Visibility</h4>
@@ -1216,7 +1249,7 @@ Deployment</h3>
 <p>The nine universal patterns are defined independently of deployment
 topology. They must hold whether the engine runs on a single workstation
 or across a hundred nodes processing petabytes. Distributed
-architectures do not change the patterns — they change the difficulty
+architectures do not change the patterns, they change the difficulty
 of maintaining them. And the compliance obligations that emerge from
 distributed processing are themselves convergent: the same regulatory
 traditions that require chain of custody, audit trails, and
@@ -1225,23 +1258,23 @@ those guarantees extend across node boundaries.</p>
 <p>Five problems define the distributed compliance challenge. First,
 <strong>encounter-sequence partitioning</strong>: a coordinator
 pre-assigns disjoint sequence ranges to nodes so that global ordering
-remains recoverable — a chain-of-custody requirement, not a performance
+remains recoverable, a chain-of-custody requirement, not a performance
 one. Second, <strong>crash isolation</strong>: a node failure must not
 compromise other nodes' compliance posture; each node checkpoints
 independently, and the global manifest records exactly which items are
 affected. Third, <strong>cross-node reconciliation</strong>: the union of
 all nodes' output must account for every input item, checked by a global
-compliance gate — not just per-node gates — because items can be lost in
+compliance gate, not just per-node gates, because items can be lost in
 transit between coordinator, worker, and storage. Fourth,
 <strong>manifest composition</strong>: each node produces a manifest
 fragment; the coordinator composes them into a single artifact that lets
 a post-hoc examiner reconstruct what happened where, when, and with what
 result. Fifth, <strong>coordinator failure</strong>: when the coordinator
-becomes unavailable, the compliance-first default is halt — processing
+becomes unavailable, the compliance-first default is halt, processing
 can be resumed, but compliance violations cannot be undone.</p>
 <p>The architectural detail behind each of these problems is in Appendix
 E. The key insight is that distribution is a deployment decision, not a
-compliance decision — the same nine patterns apply, the compliance
+compliance decision, the same nine patterns apply, the compliance
 verification gate must confirm them globally, and scale does not relax
 the obligations. It raises the engineering difficulty of honoring
 them.</p>
@@ -1255,7 +1288,7 @@ considerations. The following diagram shows stage dependencies and
 concurrency; the numbered list below provides detail.</p>
 <figure class="pipeline-diagram" style="margin:28px 0;font-family:'Segoe UI','Inter',sans-serif;font-size:8.5pt;">
 
-<!-- Processing Manifest — spanning artifact -->
+<!-- Processing Manifest, spanning artifact -->
 <div style="position:relative;background:linear-gradient(90deg, var(--ex-slate-800) 0%, #1a1520 50%, var(--ex-slate-800) 100%);border:1px solid #2a2035;border-radius:6px;padding:10px 18px;text-align:center;margin-bottom:6px;">
     <div style="font-weight:600;font-size:9pt;letter-spacing:0.06em;text-transform:uppercase;color:var(--ex-slate-900);">Processing Manifest (§5.4)</div>
     <div style="color:var(--ex-slate-400);font-size:7.5pt;margin-top:3px;">Written at start &nbsp;·&nbsp; Updated throughout &nbsp;·&nbsp; Sealed at end</div>
@@ -1265,7 +1298,7 @@ concurrency; the numbered list below provides detail.</p>
 <!-- Arrow -->
 <div style="text-align:center;margin:5px 0;"><svg width="14" height="18" viewBox="0 0 14 18" style="display:block;margin:0 auto;"><line x1="7" y1="0" x2="7" y2="12" stroke="#64748B" stroke-width="1.5"/><polygon points="2,12 7,18 12,12" fill="#64748B"/></svg></div>
 
-<!-- Stage 1: Source Intake — before concurrent zone -->
+<!-- Stage 1: Source Intake, before concurrent zone -->
 <div style="border:1px solid var(--border);border-radius:5px;padding:10px 14px;background:var(--bg-alt);">
     <div style="display:flex;justify-content:space-between;align-items:baseline;">
         <div style="font-weight:600;color:var(--ex-cyan-700);font-size:9pt;">1. Source Intake &amp; Integrity Verification</div>
@@ -1377,7 +1410,7 @@ concurrency; the numbered list below provides detail.</p>
     <div style="color:var(--fg);font-size:7.5pt;margin-top:4px;">Categorize &nbsp;·&nbsp; severity-classify &nbsp;·&nbsp; triage &nbsp;·&nbsp; sign-off record</div>
 </div>
 
-<figcaption style="font-size:8pt;color:var(--ex-slate-500);text-align:center;margin-top:10px;font-style:italic;">Processing pipeline — stage dependencies and concurrency. Custody and audit logging (stage 6) runs concurrently with stages 2–5. AI-augmented classification enters at stage 7; compliance requirements per §9 and Appendix A.6.</figcaption>
+<figcaption style="font-size:8pt;color:var(--ex-slate-500);text-align:center;margin-top:10px;font-style:italic;">Processing pipeline, stage dependencies and concurrency. Custody and audit logging (stage 6) runs concurrently with stages 2–5. AI-augmented classification enters at stage 7; compliance requirements per §9 and Appendix A.6.</figcaption>
 </figure>
 <p>Each stage must maintain the compliance invariants established in
 Section 5:</p>
@@ -1417,7 +1450,7 @@ results: a keyword hit on an attachment must surface the parent email
 and all siblings, which requires that parent-child and threading
 relationships exist in the processing output.</p>
 <p>Deferring relationship computation to the review platform means ECA
-is performed on structurally incomplete data — a gap that may not be
+is performed on structurally incomplete data, a gap that may not be
 visible to the practitioner making case strategy decisions. The families
 table (Section 5.6) and parent-child referential integrity check are the
 minimum; conversation threading is an additional enrichment that ECA
@@ -1442,7 +1475,7 @@ moved to a different volume.</li>
 <li>EDRM XML that validates against the schema but contains duplicate
 DocIDs is silently rejected on import by the review platform.</li>
 </ul>
-<p>These are not edge cases — they are the most common source of
+<p>These are not edge cases, they are the most common source of
 post-processing rework in production operations.</p>
 <p>The specification used, the field mapping, the encoding, and the
 delimiter-escaping strategy are recorded in the processing manifest. The
@@ -1457,7 +1490,7 @@ Non-success items are categorized, triaged, and dispositioned with a
 sign-off record.</p></li>
 </ol>
 <p>The EDRM <em>Processing Standards Guide</em> (Version 2) arrives at
-substantially the same pipeline through practitioner consensus —
+substantially the same pipeline through practitioner consensus,
 cryptographic hashing, chain of custody tracking, exception handling,
 and item-level metadata cataloging. Section 4 derives these requirements
 analytically from five regulatory traditions; the EDRM derives them
@@ -1490,8 +1523,8 @@ built only for traditional formats is incomplete by definition.</p>
 <h4 id="custodian-identity-resolution">Custodian Identity Resolution</h4>
 <p>The same individual routinely appears under multiple email addresses,
 aliases, and platform usernames across a single collection. Shared data
-sources — shared drives, shared inboxes, Teams channels with hundreds of
-members — contain items attributable to multiple custodians. The engine
+sources, shared drives, shared inboxes, Teams channels with hundreds of
+members, contain items attributable to multiple custodians. The engine
 must support a custodian identity model that maps aliases to canonical
 custodian identifiers, handles overlapping custodian scopes, and
 surfaces ambiguous attributions for practitioner resolution. Custodian
@@ -1524,21 +1557,21 @@ intent.</p>
 keyword search and manual review. The engine should support language
 detection at extraction (stage 3) and integrate translation as a bolt-on
 enrichment (stage 7). Translation is a deliberate enrichment, not an
-unintended alteration — architecturally distinct from extraction errors
+unintended alteration, architecturally distinct from extraction errors
 (Appendix B).</p>
 <p>The compliance wrapper is the architectural concern, not the
 translation integration itself. Per-item records must capture the
 translation engine name, version, source language, and confidence score.
 Translated content is stored alongside the original (never replacing
 it), preserving the original as the evidentiary artifact. All
-translation is lossy — human or machine — and accuracy limitations must
+translation is lossy, human or machine, and accuracy limitations must
 be documented in the processing manifest, not classified as a processing
 defect.</p>
 <p>Cloud translation APIs transmit content to a sub-processor (GDPR Art.
 28, Chapter V transfer risk); on-premises engines avoid this concern.
 For AI-based translation models, the Appendix A.6 audit requirements
-apply. The decision to translate — which languages, which items, at what
-confidence threshold — is a legal and operational decision, not an engine
+apply. The decision to translate, which languages, which items, at what
+confidence threshold, is a legal and operational decision, not an engine
 default; the engine’s role is to detect, flag, and support the
 workflow.</p>
 <h4 id="ai-assisted-filtering">AI-Assisted Filtering</h4>
@@ -1547,26 +1580,26 @@ classification in stage 7: a model that classifies a document as
 non-responsive must still produce a database record; the classification
 decision must be logged with the model name, version, and confidence
 score. The compliance requirements for AI-augmented processing pipelines
-— including audit trail structure, GDPR Art. 22 implications, and
-reproducibility qualifications for stochastic models — are developed as
+including audit trail structure, GDPR Art. 22 implications, and
+reproducibility qualifications for stochastic models, are developed as
 a convergence argument in Section 9 and detailed in Appendix A.6.</p>
 <hr />
-<h2 id="ai-augmented-processing-the-ninth-universal-pattern">9. AI-Augmented Processing: The Ninth Universal Pattern</h2>
-<p>The convergence analysis in Section 4 identified eight architectural
-patterns that all five regulatory traditions independently require of
-processing engines. As AI-augmented processing — language detection,
-machine translation, document classification, privilege screening, PII
-detection — has moved from downstream enrichment to embedded pipeline
-component, a ninth pattern has emerged from the same convergence
-methodology: <strong>algorithmic decision transparency</strong>. When
+<h2 id="ai-augmented-processing-algorithmic-decision-transparency">9. AI-Augmented Processing: Algorithmic Decision Transparency</h2>
+<p>AI-augmented processing, language detection, machine translation,
+document classification, privilege screening, PII detection, has moved
+from downstream enrichment to embedded pipeline component. When
 processing decisions are made by probabilistic models rather than
 deterministic parsers, the model provenance, decision rationale,
 confidence score, and human oversight pathway must be recorded as
-first-class audit trail entries. The same concerns that drove the first
-eight patterns (accountability, transparency, reproducibility,
-auditability) apply with equal or greater force to AI-assisted
-decisions, and the five traditions are converging on this requirement
-independently.</p>
+first-class audit trail entries. All five regulatory traditions
+independently require this: amended FRE 702 shifted the burden of
+proving reliable application to the proponent; ISO 27042 and SWGDE
+require audit trails of all processes applied; OMB M-24-10 imposes AI
+transparency requirements on federal agencies; SEC and FINRA require
+supervisory review of AI-assisted decisions; and GDPR Art. 22 prohibits
+solely automated consequential decisions. The same concerns that drive
+the other eight patterns (accountability, transparency, reproducibility,
+auditability) apply with equal or greater force here.</p>
 <table>
 <colgroup>
 <col style="width: 14%" />
@@ -1639,7 +1672,7 @@ transparency</td>
 </tbody>
 </table>
 <p>The convergence is striking: amended FRE 702 (December 2023) shifted
-the burden of proving reliable application to the proponent — the same
+the burden of proving reliable application to the proponent, the same
 year the EU AI Act reached political agreement and NIST published its AI Risk
 Management Framework. These are independent regulatory actions arriving
 at the same conclusion: AI-assisted decisions in consequential contexts
@@ -1652,11 +1685,11 @@ obligations (Annex III, including conformity assessments, technical
 documentation under Art. 11, and post-market monitoring) from August 2,
 2026. An AI classifier performing privilege screening or responsiveness
 filtering in eDiscovery <em>may</em> qualify as high-risk under Annex III,
-point 8 (administration of justice and democratic processes) — though
+point 8 (administration of justice and democratic processes), though
 this is contested for private-party civil litigation, which is
 distinguishable from government administration of justice. As of March 2026, these obligations
 are not yet in force. This paper cites the AI Act's architectural
-direction — record-keeping (Art. 12) and human oversight (Art. 14) —
+direction, record-keeping (Art. 12) and human oversight (Art. 14),
 because the convergence with existing traditions is clear, but
 practitioners should distinguish between currently applicable provisions
 and those taking effect in August 2026.</p>
@@ -1666,7 +1699,7 @@ architectural requirements. The model identifier (name, version, and a
 hash or deployment tag that uniquely identifies the model state at
 inference time), the prompt template (for LLM-based models), the
 confidence score, and the threshold used to convert probability to
-decision must all be recorded as first-class audit trail entries — not
+decision must all be recorded as first-class audit trail entries, not
 optional metadata. When an AI classification influences a privilege
 determination or a responsiveness call, the audit trail for that
 decision must meet the same standard as any other processing decision
@@ -1674,7 +1707,7 @@ under the no-silent-drops invariant.</p>
 <p>The non-determinism challenge is architecturally distinct from
 traditional processing. Deterministic parsers produce identical output
 from identical input; stochastic models may not. This does not make
-AI-assisted processing indefensible — it makes the documentation
+AI-assisted processing indefensible, it makes the documentation
 requirements different. The processing manifest must record whether
 deterministic inference was used (temperature=0, greedy decoding, fixed
 random seed) and, where stochastic inference is unavoidable, the
@@ -1705,8 +1738,8 @@ not verify extraction correctness.</p>
 experiments (Baron et al., 2006–2009) demonstrated empirically what this
 means in practice: Boolean keyword searches achieved only 22–57% recall across
 standardized test collections. (The variance reflects search design
-quality — the low end represents poorly designed searches, not an
-inherent floor — but the durable finding is that practitioners could not
+quality, the low end represents poorly designed searches, not an
+inherent floor; but the durable finding is that practitioners could not
 reliably estimate their own recall.) Self-assessment without external
 validation systematically overstates effectiveness, and this applies to
 processing-stage accounting as much as it does to search recall: if you
@@ -1719,7 +1752,7 @@ sufficient.</p>
 <li><strong>Independently constructed test corpora.</strong> Test files
 and expected results constructed with independence from the engine’s
 normal processing operations. Independence means the test corpus and
-expected results are not derived from the engine’s own output — they are
+expected results are not derived from the engine’s own output, they are
 created or validated through a separate methodology. This does not
 require a different developer; it requires a walled-off process where
 the expected results are established without reference to what the
@@ -1747,7 +1780,7 @@ controls both inputs and expected outputs), or sampling-based QA against
 native applications. The principle is independent verification; the
 method must be documented and the independence genuine.</li>
 <li><strong>Manual spot-checking.</strong> Randomly sample items and
-verify against source content using an independent extraction method —
+verify against source content using an independent extraction method,
 re-extraction with the same parser tests determinism, not correctness.
 For regulated matters (financial services examinations, federal
 productions), sampling must be statistically defensible: stratified
@@ -1784,7 +1817,7 @@ responsibility.</li>
 </ol>
 <p>Validation steps 1–5 are achievable today with existing tools and
 methods. Step 6 requires practitioners to apply CFTT principles by
-analogy — a weaker assurance than formal CFTT coverage, which does not
+analogy, a weaker assurance than formal CFTT coverage, which does not
 yet exist for this tool category. Practitioners citing this framework in
 a Daubert context should be explicit about which steps were performed and
 with what level of independence.</p>
@@ -1811,7 +1844,7 @@ processing pipeline:</p>
 <p>The CTTF would complement NIST CFTT (which focuses on acquisition
 and imaging) for the processing stage of the EDRM. Test corpora, golden
 manifests, and test specifications should be publicly available so that
-any engine — commercial or open-source — can be validated against the
+any engine, commercial or open-source, can be validated against the
 same standard.</p>
 <h3 id="error-rate-framework">10.3 Error Rate Framework</h3>
 <p>A single “error rate” is imprecise. Three distinct rates:</p>
@@ -1933,8 +1966,8 @@ transfer (SCCs, DPF), mandatory DPIA</td>
 <p>Two points warrant emphasis here because they affect the universal
 architecture:</p>
 <h4 id="disposition-authority">Disposition Authority</h4>
-<p>Any system that deletes records — including the phased deletion
-described in Appendix A.5 — must, in federal contexts, operate under a
+<p>Any system that deletes records, including the phased deletion
+described in Appendix A.5, must, in federal contexts, operate under a
 verified records disposition schedule (44 U.S.C. § 3303a). Unauthorized
 destruction is prohibited under § 3314 and may be criminal under 18
 U.S.C. § 2071. The engine must gate deletion on a verified schedule and
@@ -1977,7 +2010,7 @@ modules are required. (Note: FIPS 140-2 validation certificates
 transition to the CMVP Historical List in September 2026; new
 deployments should target FIPS 140-3 validated modules; new validations
 are under FIPS 140-3 only.) Key management must be tied to matter
-lifecycle — keys for closed matters must be recoverable for the
+lifecycle, keys for closed matters must be recoverable for the
 retention period.</li>
 </ul>
 <h4 id="threat-model">Threat Model</h4>
@@ -1987,7 +2020,7 @@ software bugs) rather than active adversarial compromise. The security
 requirements above address the next layer: insider threats and
 environmental risks (storage corruption, backup failure). The
 architecture does <em>not</em> defend against a compromised engine
-binary, a compromised OS, or supply-chain attacks — these require
+binary, a compromised OS, or supply-chain attacks, these require
 defense-in-depth measures (code signing, SBOM monitoring, runtime
 integrity verification) at the deployment layer. For classified or CUI
 environments, NIST SP 800-53 AU-9 and AU-10 impose additional audit log
@@ -2004,9 +2037,9 @@ appear out of order, undermining the encounter-sequence ordering
 described in Section 5.3.1. The processing manifest should record the
 time synchronization method, the maximum observed clock skew, and
 whether the time source is authenticated.</p>
-<p>A comprehensive security architecture — network segmentation,
+<p>A comprehensive security architecture, network segmentation,
 container security, vulnerability management, incident response, secure
-development lifecycle, multi-tenant isolation, data classification — is
+development lifecycle, multi-tenant isolation, data classification, is
 essential for deployment. These vary by deployment model (on-premises,
 cloud, air-gapped) and regulatory context (FedRAMP, SOC 2, ISO 27001)
 and warrant a companion document with comparable rigor.</p>
@@ -2026,7 +2059,7 @@ serve complementary purposes (Section 10.2).</p>
 <p><strong>“Your comprehensive logging documents your own
 failures.”</strong> Documented, investigated failures are evidence of
 reasonable steps. The procedural mitigation is in Section 10.5.</p>
-<p><strong>“You have forensic mode and chose standard mode.”</strong>
+<p><strong>“You have forensic mode and chose non-forensic mode.”</strong>
 Mode selection was documented with proportionality justification,
 authorized by the appropriate principal (counsel, compliance officer, or
 records officer), recorded in the processing manifest, and disclosed to
@@ -2037,12 +2070,12 @@ TAR was novel when Judge Peck approved it in <em>Da Silva Moore</em>
 (287 F.R.D. 182, S.D.N.Y. 2012); within three years, <em>Rio Tinto</em>
 (306 F.R.D. 125, S.D.N.Y. 2015) declared it “black letter law.” Under
 the December 2023 FRE 702 amendments, the proponent must show
-reliability by a preponderance — the compliance verification gate,
+reliability by a preponderance, the compliance verification gate,
 three-rate error framework, and validation protocol provide the
 <em>categories of evidence</em> that showing requires. The framework
 defines what must be measured and documented; Section 14 (Limitations)
-acknowledges that implementation-specific benchmarking — testing whether
-a particular engine meets the standard — remains future work.</p>
+acknowledges that implementation-specific benchmarking, testing whether
+a particular engine meets the standard, remains future work.</p>
 <p><strong>“Your engine crashed mid-run.”</strong> The crash recovery
 protocol (Section 7.2) ensures every item processed before interruption
 has a complete chain of custody. The crash boundary is documented in the
@@ -2064,7 +2097,7 @@ issue. The SBOM and fidelity tests enable that analysis.</p>
 type.”</strong> Validation coverage is iterative; the fidelity test
 corpus expands with each supported format. Unvalidated formats rely on
 underlying library validation and automated stability checks. The gap is
-acknowledged and documented — more defensible than claiming universal
+acknowledged and documented, more defensible than claiming universal
 validation.</p>
 <p><strong>“Your concurrent architecture introduces non-determinism in
 dedup ordering.”</strong> The reproducibility protocol specifies what must match
@@ -2080,7 +2113,7 @@ and the crash. Source-derived deduplication keys prevent double-counting
 on recovery. The global processing manifest documents the failure,
 reassignment, and reconciliation. The cross-node compliance verification
 gate confirms the composed output is complete.</p>
-<p><strong>“Your engine cannot process encrypted items — you’re silently
+<p><strong>“Your engine cannot process encrypted items, you’re silently
 dropping content.”</strong> The engine does not silently drop encrypted
 items; it records them with an encryption-detected status (Section 5.8).
 Decryption is attempted when credentials are available; items that
@@ -2089,7 +2122,7 @@ detection method logged. The no-silent-drops invariant requires the
 record; it does not require successful extraction. The distinction
 between “we couldn’t read this” (documented, defensible) and “we didn’t
 know it was there” (spoliation risk) is the architectural guarantee.</p>
-<p><strong>“Your tool is not generally accepted — established vendors
+<p><strong>“Your tool is not generally accepted, established vendors
 are the industry standard.”</strong> General acceptance is one of four
 non-exclusive Daubert factors. Under FRE 702 as amended, the proponent
 must also show the methodology was reliably applied to the facts.
@@ -2109,11 +2142,11 @@ configuration recording in the processing manifest (every parameter,
 with justification), configuration review workflows (mode selection
 authorized by counsel or compliance, not the operator alone), and
 post-processing checks that flag suspicious configurations (zero items
-in a date range, standard mode for litigation-hold matters). The engine
+in a date range, non-forensic mode for litigation-hold matters). The engine
 cannot prevent configuration errors, but it makes them visible and
 auditable.</p>
 <p><strong>“Your machine translation introduced errors that changed the
-meaning of key documents.”</strong> All translation is lossy — human or machine — and the question is
+meaning of key documents.”</strong> All translation is lossy, human or machine, and the question is
 whether the workflow documented its limitations. Translated content is
 stored alongside the original (the evidentiary artifact); engine,
 version, language, and confidence are recorded. The fidelity risk is
@@ -2135,7 +2168,7 @@ compensates for it.</p>
 the engine followed a defined process does not independently establish
 that the process produced correct results. The validation protocol
 (Section 10) addresses this gap, but validation is inherently incomplete
-— it can demonstrate correctness for tested inputs but cannot guarantee
+it can demonstrate correctness for tested inputs but cannot guarantee
 it for all possible inputs. This is the paper’s most fundamental
 structural limitation.</p>
 <p><strong>The convergence thesis is an analytical construct.</strong>
@@ -2146,7 +2179,7 @@ different boundaries. Citing this paper as evidence that a vendor
 convergent patterns identified from the regulatory landscape, not
 obligations imposed by any single authority. The question is whether the
 architectural requirements the mapping identifies are individually sound
-and supported by the cited standards — testable independently of the
+and supported by the cited standards, testable independently of the
 convergence framing and independent of the threshold chosen.</p>
 <p><strong>No implementation benchmarking.</strong> This paper is a
 regulatory convergence analysis, not a performance study. The
@@ -2159,9 +2192,9 @@ compliance verification) has been performed. Such benchmarking is out of
 scope; the validation methodology in Section 10.2 provides the protocol
 for implementation-specific testing.</p>
 <p><strong>Implementation feasibility at scale.</strong> The
-requirements are presented individually. Their interactions at scale —
+requirements are presented individually. Their interactions at scale,
 per-item custody logging, five-algorithm hashing, encounter-sequence
-ordering, and compliance verification across millions of items — may
+ordering, and compliance verification across millions of items, may
 produce challenges not apparent from the individual requirements. The
 architecture’s modularity (Section 6, Section 5.3.1) enables incremental
 validation, but that validation remains future work.</p>
@@ -2206,10 +2239,10 @@ authorities all evaluate intent.</p>
 once you see it: every tradition addresses the same fundamental problem.
 The architectural patterns that emerge are the same. What differs is the
 statutory citation, the enforcement mechanism, and the output format.
-The universal patterns — no-silent-drops, cryptographic integrity, chain
+The universal patterns, no-silent-drops, cryptographic integrity, chain
 of custody, audit trails, processing manifest, compliance verification,
 reproducibility, encrypted content handling, and algorithmic decision
-transparency — are not engineering intuitions; they are what the law
+transparency, are not engineering intuitions; they are what the law
 requires when you read the statutes carefully. The sector-specific additions are real and important, but
 they build on a common foundation rather than requiring a different
 architecture.</p>
@@ -2219,7 +2252,7 @@ the ability to demonstrate, with evidence, that reasonable steps were
 taken, that every item was accounted for, that every failure was
 documented, and that the methodology is transparent, reproducible,
 validated, and aligned with the standards that govern the handling of
-electronically stored information — regardless of which regulatory
+electronically stored information, regardless of which regulatory
 tradition is asking.</p>
 <hr />
 <h2 id="appendix-a-sector-specific-regulatory-detail">Appendix A:
@@ -2238,7 +2271,7 @@ U.S.C. §1746 completes the certification). For extracted derivatives,
 the processing manifest and compliance artifacts support authentication
 under FRE 901(b)(9) (testimony describing extraction) or 901(b)(3)
 (expert comparison). Compliance artifacts also support FRE 803(6)
-business records admission and 902(13) certification — though the 803(6)
+business records admission and 902(13) certification, though the 803(6)
 foundation requires a qualified witness who can testify to regular
 operation, making it an organizational obligation the engine supports,
 not an automatic consequence of running it. Authentication strategy for
@@ -2249,12 +2282,12 @@ Emerging authority suggests purely machine-generated records may fall
 outside FRE 801(a) hearsay (<em>Lizarraga-Tirado</em>, 9th Cir. 2015),
 but this is circuit-specific, factually narrow (GPS coordinates with no
 human input), and should not be relied upon without counsel's specific
-analysis of whether the output at issue was purely machine-generated —
+analysis of whether the output at issue was purely machine-generated,
 complex processing output involving human-designed parsers, configuration
 choices, and operator decisions is distinguishable on the facts.</p>
 <p><strong>Attorney certification (FRCP 26(g)).</strong> The signing
 attorney certifies the discovery effort is reasonable and consistent
-with the rules — creating a personal obligation to understand the
+with the rules, creating a personal obligation to understand the
 processing methodology (<em>Mancia v. Mayflower</em>, D. Md. 2008). The
 compliance verification gate, processing manifest, and three-rate error
 framework provide the evidence base that certification requires. The
@@ -2263,7 +2296,7 @@ agreeing on processing parameters before processing begins is
 increasingly court-endorsed best practice.</p>
 <p><strong>Daubert/Kumho Tire and FRE 702.</strong> The Daubert
 framework evaluates methodology through testability, error rate, peer
-review, and general acceptance — all supported by the validation
+review, and general acceptance, all supported by the validation
 protocol in Section 10. Under Frye jurisdictions, “general acceptance” of
 the methodology’s components may support admissibility even when the
 overall system is novel. The December 2023 FRE 702 amendments clarify
@@ -2275,13 +2308,13 @@ methodology.</p>
 <p><strong>Additional sector-specific requirements:</strong></p>
 <ul>
 <li><strong>Configurable proportionality</strong> (Section 6).</li>
-<li><strong>ESI protocol conformance</strong> per FRCP 16(b)/26(f) —
+<li><strong>ESI protocol conformance</strong> per FRCP 16(b)/26(f),
 parameters established at the Rule 26(f) meet-and-confer.</li>
 <li><strong>Expert testimony artifacts.</strong></li>
 <li><strong>State court spoliation variations</strong> (e.g., Texas
 <em>Brookshire Brothers</em> two-tier framework paralleling but not
 identical to federal 37(e)(2)).</li>
-<li><strong>Privilege sequestration</strong> — detect, flag, sequester,
+<li><strong>Privilege sequestration</strong>, detect, flag, sequester,
 and log potentially privileged items with a distinct status; support
 clawback-triggered re-sequestration (FRCP 26(b)(5)(B)) via
 source-derived deduplication keys without reprocessing. FRE 502(d) court
@@ -2291,7 +2324,7 @@ to the no-silent-drops invariant. See §5.1.</li>
 </ul>
 <h3 id="a.2-digital-forensics">A.2 Digital Forensics</h3>
 <p><strong>ISO 27037</strong> principles (hash at extraction, document
-every action, never modify source) apply to processing by analogy — the
+every action, never modify source) apply to processing by analogy, the
 standard’s normative scope is acquisition, not processing, but its
 principle of continuity (unbroken chain of evidence handling from
 acquisition through analysis) is architecturally relevant.</p>
@@ -2301,7 +2334,7 @@ properties: reproducibility (same results by a different operator using
 the same method and different equipment), repeatability (same results by
 the same operator using the same method and equipment), and
 justifiability (the ability to justify all actions and methods,
-including validation that tools are appropriate for the purpose —
+including validation that tools are appropriate for the purpose,
 linking directly to Section 10.2). The distinction between
 reproducibility and repeatability matters for validation design:
 repeatability can be verified with a single lab; reproducibility
@@ -2315,7 +2348,7 @@ downstream stages are supported by the engine’s structured output but
 are out of scope.</p>
 <p><strong>SWGDE validation.</strong> SWGDE <em>Recommended Guidelines
 for Validation Testing</em> requires documented validation before using
-a tool in casework and after significant changes — this is an obligation
+a tool in casework and after significant changes, this is an obligation
 on the <em>examiner’s laboratory</em>, not the tool vendor. (Consult
 swgde.org for the current edition.) The engine’s validation protocol
 (Section 10.2) supports but does not substitute for independent
@@ -2334,8 +2367,8 @@ polyglot files (valid under multiple format specifications
 simultaneously), crafted archive structures that exploit parser
 recursion or memory allocation, steganographic content, and files with
 manipulated metadata (false timestamps, spoofed MIME types). The engine
-should not attempt to detect all anti-forensic techniques — that is a
-forensic analysis function — but it must be resilient to them.
+should not attempt to detect all anti-forensic techniques, that is a
+forensic analysis function; but it must be resilient to them.
 Specifically: items that cause parser exceptions are recorded as Failed
 (not silently dropped), items with inconsistent metadata (e.g., MIME
 type detection disagrees with file extension) are flagged in the audit
@@ -2438,7 +2471,7 @@ Permanent Electronic Records</em> (Bulletin 2015-04) specifies required
 metadata fields (record schedule number, transfer authority, creating
 office, date range, access restrictions) that must be present in the
 transfer package. The gap between a BagIt-conformant package and a
-NARA-accepted transfer is significant — NARA performs automated
+NARA-accepted transfer is significant, NARA performs automated
 validation on receipt and rejects packages with missing metadata,
 unsupported file formats, or structural errors. The engine should
 produce transfer-ready packages that include all required NARA metadata
@@ -2456,7 +2489,7 @@ requirements and routine-use authorizations are architecturally distinct
 from GDPR and warrant separate treatment.</li>
 </ul>
 <h3 id="a.4-financial-services">A.4 Financial Services</h3>
-<p>No-silent-drops ensures no communications are lost — critical given
+<p>No-silent-drops ensures no communications are lost, critical given
 the SEC’s 2021–2024 enforcement wave against recordkeeping failures
 ($200M combined SEC/CFTC penalty against J.P. Morgan (Dec. 2021),
 16-firm sweep (2022), continuing through 2024). The CFTC pursued
@@ -2473,11 +2506,11 @@ requirement is unchanged: records cannot be altered without
 detection.</p>
 <p><strong>FINRA.</strong> Rule 3110 (supervisory systems) means mode
 selection, custodian scoping, and date-range configuration are
-supervisory decisions — the processing manifest documents who authorized
+supervisory decisions, the processing manifest documents who authorized
 what and when. Rule 4511 requires six-year retention (first two years
 readily accessible). Rule 8210 (examination authority) requires
 on-demand production with compressed timelines and no proportionality
-defense — the engine must support an examination response mode
+defense, the engine must support an examination response mode
 prioritizing speed and completeness.</p>
 <p><strong>Off-channel communications.</strong> The enforcement wave was
 triggered by unapproved messaging platforms (WhatsApp, Signal,
@@ -2493,11 +2526,11 @@ and scope vary; the engine must support configurable retention by
 jurisdiction and record category.</p>
 <p><strong>Additional sector-specific requirements:</strong></p>
 <ul>
-<li><strong>WORM-compliant output</strong> per SEC 17a-4(f)(2)(ii)(A) —
+<li><strong>WORM-compliant output</strong> per SEC 17a-4(f)(2)(ii)(A),
 content-addressed storage (Section 5.5) is not equivalent to WORM;
 output must be written to SEC-compliant immutable storage.</li>
 <li><strong>Communications classification</strong> (business
-vs. personal per 17a-4(b)(4)) — the classification methodology is a
+vs. personal per 17a-4(b)(4)), the classification methodology is a
 supervisory decision, but the engine must support classification tagging
 and produce segregated output.</li>
 <li><strong>Retention period management</strong> with category-based
@@ -2512,7 +2545,7 @@ supports Article 32 (security of processing). The audit trail supports
 Article 5(2) (accountability) and Article 30 (records of processing
 activities). GDPR Article 25 (data protection by design and by default)
 is the privacy provision most directly aligned with the compliance-first
-design philosophy — it requires that data protection principles be
+design philosophy, it requires that data protection principles be
 implemented architecturally, not added retroactively.</p>
 <p><strong>The data minimization tension.</strong> The no-silent-drops
 invariant requires recording every item encountered. Privacy laws (GDPR
@@ -2522,7 +2555,7 @@ responsive without first extracting and indexing the data? The answer is
 that the phased approach is sequential, not selective. The engine
 performs full extraction and indexing under an appropriate legal basis
 (typically Art. 6(1)(f) legitimate interest, subject to the three-part
-balancing test — though this basis is increasingly contested in
+balancing test, though this basis is increasingly contested in
 cross-border eDiscovery contexts, particularly for broad extraction of
 HR and communications data, where multiple DPAs have taken restrictive
 positions; the legal basis selection is context-specific and must be
@@ -2533,9 +2566,9 @@ size, processing status). Non-responsive items retain only the stub.
 This approach satisfies both preservation (“we recorded that this item
 existed”) and minimization (“we did not retain personal data content
 beyond what was necessary”). Three qualifications: (1) metadata stubs
-will frequently constitute personal data under GDPR Art. 4(1) — file
+will frequently constitute personal data under GDPR Art. 4(1), file
 names, email addresses in sender/recipient fields, timestamps, and file
-paths routinely identify individuals — and require their own legal basis
+paths routinely identify individuals, and require their own legal basis
 for retention; (2) the responsive-subset determination is a legal
 function with its own legal basis requirement, not a purely technical
 filter; (3) stub retention periods must be defined consistent with
@@ -2545,11 +2578,11 @@ processing, including hash computation, must be documented.</p>
 for each distinct processing operation. In the compliance-first
 pipeline, at least three stages require independent analysis: initial
 extraction, content indexing, and stub retention after content deletion.
-The appropriate basis varies by context — Art. 6(1)(f) legitimate
+The appropriate basis varies by context, Art. 6(1)(f) legitimate
 interest for private litigation, Art. 6(1)(c) legal obligation where the
 obligation arises from EU law, Art. 6(1)(e) public interest for
 government records. The engine’s processing manifest should record the
-legal basis claimed for each stage — a documentation requirement the
+legal basis claimed for each stage, a documentation requirement the
 engine supports, not a legal determination it makes.</p>
 <p><strong>The erasure tension.</strong> An architecture built on
 append-only audit logs and content-addressed storage is resistant to
@@ -2565,14 +2598,14 @@ provided records are limited to what the accountability obligation
 requires. However, audit record retention is not indefinite: Art.
 5(1)(e) storage limitation applies to all personal data including audit
 records. Stub and audit record retention periods must be defined and
-justified — a non-trivial design requirement for matters with long
+justified, a non-trivial design requirement for matters with long
 retention tails (financial services, federal records).</p>
 <p><strong>Purpose limitation (Art. 5(1)(b)).</strong> Data collected
 for eDiscovery or regulatory compliance may not be repurposed for
 internal investigations, later litigation, or AI training without an
 independent legal basis analysis. Content-addressed storage makes
-repurposing technically simple — the data is already indexed and
-searchable — which makes the purpose limitation architecturally
+repurposing technically simple, the data is already indexed and
+searchable, which makes the purpose limitation architecturally
 significant: the engine should support purpose tagging at the matter
 level, and queries against processed data should be auditable against
 the declared purpose. This is a live DPA enforcement area.</p>
@@ -2584,7 +2617,7 @@ automated processing (search indexing, enrichment, export) of those
 records without deleting them. The restricted status must be surfaced in
 compliance checks and export workflows.</p>
 <p><strong>UK GDPR.</strong> Post-Brexit, the UK operates under the UK
-GDPR and Data Protection Act 2018 — a parallel but distinct framework.
+GDPR and Data Protection Act 2018, a parallel but distinct framework.
 The UK’s IDTA supplements or replaces EU SCCs for cross-border
 transfers; the EU’s adequacy decision for the UK (June 2021, with sunset
 clause) and the UK’s own adequacy assessments must be tracked
@@ -2602,7 +2635,7 @@ requires Transfer Impact Assessments; the EU-U.S. Data Privacy Framework
 the CJEU are pending (La Quadrature du Net; Digital Rights Ireland) and
 adequacy decisions can be revoked or invalidated. Art. 49(1)(e) permits
 transfers for legal claims but EDPB Guidelines 2/2018 require strict,
-case-by-case necessity assessment — not a standing authorization across a
+case-by-case necessity assessment, not a standing authorization across a
 matter. Given this uncertainty, <strong>in-jurisdiction processing is the
 architecturally preferred solution</strong>: process EU data in EU
 regions, transfer only the responsive subset under a valid mechanism.
@@ -2616,11 +2649,11 @@ Art. 48, which provides that court judgments or administrative decisions
 of a third country requiring the transfer of personal data are
 recognized or enforceable only if based on an international agreement
 such as a mutual legal assistance treaty (MLAT). US litigation discovery
-requests — including subpoenas and court orders — do not constitute a
+requests, including subpoenas and court orders, do not constitute a
 valid basis under Art. 48 absent an MLAT or equivalent instrument. The
 EDPB and multiple national supervisory authorities (CNIL, Berlin DPA)
 have been explicit on this point: a foreign court order alone does not
-authorize the transfer. This is not an academic distinction — it is the
+authorize the transfer. This is not an academic distinction, it is the
 threshold question that must be resolved before any transfer mechanism
 analysis under Art. 45, 46, or 49 becomes relevant.</p>
 <p>The architectural implication is direct: the processing engine must
@@ -2628,26 +2661,26 @@ support jurisdiction-aware routing and must not transfer personal data
 cross-border without a documented legal basis addressing both Art. 48
 (recognition of the foreign order) and the Chapter V transfer mechanism.
 Jurisdiction tagging at ingestion, per-item data residency metadata, and
-policy-driven transfer gates — where items cannot leave their
+policy-driven transfer gates, where items cannot leave their
 jurisdiction of origin without an affirmative legal basis
-determination — are required capabilities, not optional features. The
+determination, are required capabilities, not optional features. The
 engine's default posture when a cross-border transfer is attempted
 without a documented legal basis must be to block and log: the transfer
 is denied, the attempt is recorded in the audit trail with the item
 identifiers and requesting operator, and the matter is escalated for
 legal determination. A permissive default (transfer first, document
 later) inverts the GDPR's prohibition model and creates an irremediable
-compliance gap — once personal data has crossed a border without
+compliance gap, once personal data has crossed a border without
 authorization, the violation has occurred.</p>
 <p><strong>DPIA.</strong> Large-scale ESI processing meets the Art.
 35(1) “high risk” threshold, making a Data Protection Impact Assessment
 mandatory before processing begins.</p>
 <p><strong>Special category data (Art. 9).</strong> The engine must
 process special category data to detect it, requiring a derogation under
-Art. 9(2) — typically (f) legal claims, (g) substantial public interest,
+Art. 9(2), typically (f) legal claims, (g) substantial public interest,
 or (j) archiving/research depending on deployment context. Two
 qualifications: Art. 9(2)(f) is narrower than general civil litigation
-discovery — it covers only what is strictly necessary for the specific
+discovery, it covers only what is strictly necessary for the specific
 claim, not broad collection. Art. 9(2)(g) requires not just a
 substantial public interest but proportionality, and many member states
 have enacted national derogations with additional safeguards (e.g.,
@@ -2662,7 +2695,7 @@ commonly applies in large-scale processing but must be documented.
 Comity: cross-border discovery conflicts require analysis per
 <em>Aerospatiale</em>, 482 U.S. 522 (1987).</p>
 <p><strong>Data subject rights (Arts. 15–22).</strong> Processing
-engines must support — not merely tolerate — the exercise of data
+engines must support, not merely tolerate, the exercise of data
 subject rights during active processing and review. Four rights have
 direct architectural implications:</p>
 <ul>
@@ -2678,7 +2711,7 @@ targeted, verifiable, and attested. The engine must delete the specific
 items identified without disturbing the surrounding dataset, generate a
 cryptographic attestation of deletion (item hashes before removal,
 confirmation of removal, timestamp), and preserve the audit trail entry
-itself — the record that deletion occurred is not subject to erasure.
+itself, the record that deletion occurred is not subject to erasure.
 Art. 17(3)(e) provides an exemption for legal claims, but the controller
 must document the balancing exercise.</li>
 <li><strong>Right to restriction of processing (Art. 18).</strong> When
@@ -2691,7 +2724,7 @@ flags that are respected by all downstream processing stages.</li>
 metadata is inaccurate (e.g., wrong custodian attribution, incorrect
 date parsing), the engine must support correction while preserving the
 original values and recording the rectification event in the audit
-trail. This is distinct from re-extraction — rectification is a
+trail. This is distinct from re-extraction, rectification is a
 controller-directed correction of identified inaccuracies.</li>
 </ul>
 <h3 id="a.6-ai-augmented-processing-pipelines">A.6 AI-Augmented
@@ -2700,7 +2733,7 @@ Processing Pipelines</h3>
 merely downstream in review. Responsiveness filtering, privilege
 detection, PII tagging, language classification, and document
 categorization are all tasks where AI classifiers now operate within or
-immediately after extraction — making processing-stage decisions that
+immediately after extraction, making processing-stage decisions that
 determine what reaches the review platform and what does not. The
 compliance implications are distinct from traditional review-stage TAR
 (technology-assisted review) because processing-stage AI decisions
@@ -2720,7 +2753,7 @@ a structured audit record. The record must include:</p>
 model weights or a deployment tag that uniquely identifies the model
 state at inference time. For continuously updated models (e.g.,
 continuous active learning), the model state hash at the time of
-inference is the version — not the training iteration or the deployment
+inference is the version, not the training iteration or the deployment
 label.</li>
 <li><strong>Input reference</strong>: the item ID and content hash of
 the item classified.</li>
@@ -2821,7 +2854,7 @@ the outcome.</li>
 decisions may be permissible under Art. 22(2)(a) (necessary for contract
 performance), (b) (authorized by law with suitable safeguards), or (c)
 (explicit consent). In practice, Art. 22(2)(a) almost never applies in
-eDiscovery — the data subject is rarely a party to the contract that
+eDiscovery, the data subject is rarely a party to the contract that
 necessitates processing, and the "necessary for performance" threshold
 is narrow. Art. 22(2)(b) (authorized by member-state or EU law) is the
 more likely basis where available, but requires identifying the specific
@@ -2830,7 +2863,7 @@ must be documented in the processing manifest alongside the legal basis
 for the extraction itself.</p>
 <p><strong>Post-SCHUFA: Art. 22(1) as default prohibition.</strong>
 Following CJEU C-634/21 (<em>SCHUFA Holding</em>, December 2023), the
-stronger view — now endorsed by the Court — is that Art. 22(1) operates
+stronger view, now endorsed by the Court, is that Art. 22(1) operates
 as a general prohibition on solely automated decisions with legal or
 similarly significant effects, not merely a right the data subject must
 affirmatively invoke. The practical consequence for processing engine
@@ -2845,7 +2878,7 @@ tags items by language is unlikely to produce "legal effects" on a data
 subject; a privilege classifier that excludes items from production, or
 a PII detector that triggers redaction, is more likely to do so. In
 eDiscovery, the data subject is typically a third party (custodian,
-counterparty, employee) — whether exclusion of a document from a
+counterparty, employee), whether exclusion of a document from a
 production set "significantly affects" that data subject requires
 case-by-case analysis. A privilege classifier affects the <em>parties to
 the litigation</em> directly; the effect on the data subject whose data
@@ -2855,7 +2888,7 @@ adopted 6 February 2018, endorsed by EDPB) provide the primary soft law
 on Art. 22 scope and should be consulted alongside the SCHUFA ruling
 when assessing applicability.</p>
 <p><strong>Operational proportionality.</strong> Mandatory human review
-of every AI classification is infeasible at production scale — a
+of every AI classification is infeasible at production scale, a
 million-document corpus with a 5% privilege hit rate produces 50,000
 mandatory reviews. The proportionate response, consistent with the GDPR's
 risk-based approach, is <strong>sampling-based human oversight</strong>:
@@ -2868,18 +2901,18 @@ default; for processing-stage classifications that feed downstream
 review workflows, sampling-based oversight is a defensible proportionate
 alternative provided it is documented and the threshold is set by
 counsel, not the engineering team.</p>
-<p>The audit trail must record whether human oversight occurred — and
-if sampling-based, the sample parameters and results — not merely
+<p>The audit trail must record whether human oversight occurred, and
+if sampling-based, the sample parameters and results, not merely
 whether review was offered. For processing pipelines where AI classifiers
-feed downstream decisions — privilege sequestration, PII redaction,
-responsiveness filtering — the <em>SCHUFA</em> ruling converts what was
+feed downstream decisions, privilege sequestration, PII redaction,
+responsiveness filtering, the <em>SCHUFA</em> ruling converts what was
 previously a defensible design choice (automated with review on request)
 into a compliance gap that requires active, documented human oversight at
 a level proportionate to the decision's consequences.</p>
 <h4 id=”a.6.4-model-training-and-purpose-limitation”>A.6.4 Model
 Training and Purpose Limitation</h4>
-<p>The purpose limitation concern identified in Appendix A.5 — that
-content-addressed storage makes repurposing technically simple — is
+<p>The purpose limitation concern identified in Appendix A.5, that
+content-addressed storage makes repurposing technically simple, is
 amplified when AI models are involved. Two specific risks:</p>
 <ul>
 <li><strong>Training on client data.</strong> If a processing engine’s
@@ -2933,7 +2966,7 @@ stratified sample) to establish concordance rates.</li>
 </ul>
 <blockquote>
 <p><strong>Scope boundary.</strong> The validation extensions above apply
-to AI components <em>at the processing stage</em> — decisions that
+to AI components <em>at the processing stage</em>, decisions that
 affect what reaches the review platform. Review-stage TAR methodology
 (document-level relevance ranking, iterative active learning, review
 prioritization) is well-covered by Grossman &amp; Cormack (2011), the
@@ -3008,7 +3041,7 @@ fields</td>
 ambiguity; epoch reference misinterpretation</td>
 <td>Items placed in wrong chronological context; date-range filters
 produce wrong results</td>
-<td>Critical — temporal errors can move items in or out of relevant date
+<td>Critical, temporal errors can move items in or out of relevant date
 ranges</td>
 <td>Automated (format validation, cross-field consistency)</td>
 </tr>
@@ -3058,7 +3091,7 @@ compromised</td>
 </table>
 <p><strong>Severity definitions.</strong> <em>Critical</em>: may affect
 responsiveness determination, date-range filtering, or custodian
-attribution — failures that could change the outcome of a review or
+attribution, failures that could change the outcome of a review or
 investigation. <em>Significant</em>: affects review accuracy or
 efficiency but is unlikely to change the ultimate outcome.
 <em>Minor</em>: cosmetic or inconsequential (e.g., minor whitespace
@@ -3073,7 +3106,7 @@ but the root cause drives remediation.</p>
 <hr />
 <h2
 id="appendix-c-hash-algorithm-selection-architecture-and-rationale">Appendix
-C: Hash Algorithm Selection — Architecture and Rationale</h2>
+C: Hash Algorithm Selection, Architecture and Rationale</h2>
 <p>Section 5.2 establishes the multi-algorithm hashing requirement. A
 common objection is that computing four or five digests per item
 introduces unacceptable throughput overhead. This appendix explains why
@@ -3086,7 +3119,7 @@ multi-digest hashing is not an inherent throughput constraint.</p>
 <h3 id="c.1-single-pass-multi-digest-architecture">C.1 Single-Pass
 Multi-Digest Architecture</h3>
 <p>The naïve approach to multi-algorithm hashing reads the content once
-per algorithm — five algorithms means five I/O passes. At enterprise
+per algorithm, five algorithms means five I/O passes. At enterprise
 data volumes, this is prohibitive. The correct implementation reads
 content exactly once, updating all digest instances concurrently as each
 buffer is read:</p>
@@ -3174,7 +3207,7 @@ it relies on a cryptographically broken algorithm <em>and</em> is slower
 than its secure replacement on modern hardware.</p>
 <h3 id="c.3-the-sha-3-question">C.3 The SHA-3 Question</h3>
 <p>SHA-3 (FIPS 202, August 2015) is based on the Keccak sponge
-construction — an entirely different cryptographic family from the
+construction, an entirely different cryptographic family from the
 Merkle-Damgård construction underlying MD5, SHA-1, SHA-256, and SHA-512.
 This architectural independence is its primary value proposition for
 forensic and compliance contexts:</p>
@@ -3184,7 +3217,7 @@ against the Merkle-Damgård construction would compromise four of the
 five hashes simultaneously. SHA-3 provides a hedge: if MD5 (broken),
 SHA-1 (weakened), and hypothetically SHA-256 were all compromised by a
 common structural attack, SHA3-256 would remain unaffected. This is not
-a theoretical concern — MD5 and SHA-1 were broken by exploiting shared
+a theoretical concern, MD5 and SHA-1 were broken by exploiting shared
 structural properties of the Merkle-Damgård construction.</li>
 <li><strong>Regulatory trajectory.</strong> NIST SP 800-131A Rev. 2
 governs transitions between algorithms. While SHA-3 is not yet mandated
@@ -3209,7 +3242,7 @@ throughput to CPU throughput: when storage delivers data slower than the
 slowest digest can consume it, adding SHA-3 is effectively free. For
 workloads dominated by very small items (millions of short messages or
 metadata records), per-item overhead and database writes may dominate
-over hash computation, reducing the I/O masking effect — but the
+over hash computation, reducing the I/O masking effect; but the
 absolute cost of hashing a small item remains negligible. (Section 7.4
 discusses this workload profile in the broader compliance-overhead
 context: per-item custody logging and encounter-sequence assignment, not
@@ -3258,7 +3291,7 @@ which algorithms were enabled for the run.</strong> A hash that was not
 computed is fundamentally different from a hash that was computed and
 found to be null (zero-length file) or absent (extraction failure).
 Without this metadata, the absence of a hash value in the output is
-ambiguous — and ambiguity in forensic evidence undermines its
+ambiguous, and ambiguity in forensic evidence undermines its
 evidentiary weight. Every compliance artifact (processing manifest,
 compliance verification report, load file export) must state the hash
 configuration explicitly.</p>
@@ -3328,7 +3361,7 @@ Validation Rules (§5.4)</h3>
 <p>The engine should flag suspicious configurations before extraction
 begins:</p>
 <ul>
-<li>Standard mode selected for a matter under litigation hold</li>
+<li>Non-forensic mode selected for a matter under litigation hold</li>
 <li>Zero items matching a configured date filter</li>
 <li>Custodian lists that differ from a prior run on the same source</li>
 <li>Forensic mode disabled for a forensic source type (imaged media,
@@ -3453,7 +3486,7 @@ estimated uncommitted window before resuming.</p>
 can leave binary content written to content-addressed storage paths
 without a corresponding custody record in the database. On recovery, the
 engine must reconcile CAS contents against committed custody records.
-Orphaned binaries — content with no custody record — should be logged,
+Orphaned binaries, content with no custody record, should be logged,
 quarantined, and either re-associated with their items during
 reprocessing (via the source-derived deduplication key matching the same
 content hash) or removed after verification that the item will be
@@ -3556,13 +3589,16 @@ requirements. Cloud provider audit logs supplement but do not replace
 the engine’s own audit trail.</p>
 <hr />
 <h2 id="acknowledgments">Acknowledgments</h2>
-<p>The author thanks A.B. (peer reviewer) for detailed peer review and
-practitioner feedback across two review rounds. The first round
+<p>The author thanks Aidan Booth (Ashcroft Forensic Advisory) for
+detailed peer review and practitioner feedback across two review rounds,
+and for the third-round feedback that refined the non-forensic mode
+framing, verification independence language, and audit trail
+completeness definitions. The first round
 substantially improved the treatment of reprocessing semantics,
 collaboration suite data models, encounter-sequence mechanics, source
-hash ingestion, the phased extraction sequence, standard mode rationale,
+hash ingestion, the phased extraction sequence, non-forensic mode rationale,
 and gate failure semantics in Sections 2, 3, 5, and 11. The second round
-strengthened the treatment of standard-mode audit logging,
+strengthened the treatment of non-forensic-mode audit logging,
 pre-processing chain of custody, crash recovery mechanics, throughput at
 scale, parent-child relationships for early case assessment, timezone
 handling, foreign language translation, and validation methodology in
@@ -3612,8 +3648,8 @@ scope boundary (A.6.5).</td>
 <tr>
 <td>0.4</td>
 <td>2026-03-24</td>
-<td>Elevated algorithmic decision transparency to ninth universal pattern
-(Section 9). Substantially expanded distributed processing treatment
+<td>Added algorithmic decision transparency (Section 9). Substantially
+expanded distributed processing treatment
 (Section 7.5). Added audit log event category table (Section 6), CTTF
 formal proposal (Section 10.2), date-range collection buffers
 (Section 8). Renumbered Sections 9–14 to 10–15.</td>
@@ -3622,7 +3658,7 @@ formal proposal (Section 10.2), date-range collection buffers
 <td>0.3</td>
 <td>2026-03-23</td>
 <td>Reviewer feedback integration (second round) and readability pass.
-Second-round technical changes: standard-mode audit log changed from
+Second-round technical changes: non-forensic-mode audit log changed from
 omitted to lightweight; non-toggleable features expanded to seven; Art.
 30 register clarified; pre-processing normalization note (Section 7.1);
 crash recovery and checkpoint overhead clarified (Section 7.2);
@@ -3650,7 +3686,8 @@ pass.</td>
 regulatory traditions, convergence analysis, processing modes,
 validation protocol, fidelity taxonomy, hash performance data. Iterative
 refinement through structured multi-persona review (10-agent panel). One
-external reviewer (A.B.) contributed feedback.</td>
+external reviewer (Aidan Booth, Ashcroft Forensic Advisory) contributed
+feedback.</td>
 </tr>
 </tbody>
 </table>
@@ -3663,7 +3700,7 @@ external reviewer (A.B.) contributed feedback.</td>
 <li><em>Kumho Tire v. Carmichael</em>, 526 U.S. 137 (1999)</li>
 <li><em>Zubulake v. UBS Warburg</em> (<em>Zubulake IV</em>), 220 F.R.D.
 212 (S.D.N.Y. 2003); (<em>Zubulake V</em>), 229 F.R.D. 422 (S.D.N.Y.
-2004) — <em>Zubulake IV</em> established the duty to preserve and
+2004), <em>Zubulake IV</em> established the duty to preserve and
 counsel’s preservation obligations; <em>Zubulake V</em> addressed
 counsel’s affirmative duty to supervise preservation and imposed
 sanctions for failure to do so; the sanctions framework was largely
@@ -3679,37 +3716,37 @@ Md. 2007)</li>
 <li><em>Hyles v. New York City</em>, No. 10-cv-3119, 2016 WL 4077114
 (S.D.N.Y. Aug. 1, 2016)</li>
 <li><em>DR Distributors v. 21 Century Smoking</em>, 513 F. Supp. 3d 839
-(N.D. Ill. 2021) — pervasive ESI preservation and production failures;
+(N.D. Ill. 2021), pervasive ESI preservation and production failures;
 sanctions including adverse inference, fee-shifting, and evidentiary
 preclusion for systematic discovery deficiencies</li>
 <li><em>Societe Nationale Industrielle Aerospatiale v. US District
-Court</em>, 482 U.S. 522 (1987) — comity analysis for cross-border
+Court</em>, 482 U.S. 522 (1987), comity analysis for cross-border
 discovery</li>
 <li><em>United States v. Lizarraga-Tirado</em>, 789 F.3d 1107 (9th Cir.
-2015) — machine-generated evidence outside FRE 801(a); circuit-specific,
+2015), machine-generated evidence outside FRE 801(a); circuit-specific,
 applicability to complex processing output unsettled</li>
-<li><em>United States v. Khorozian</em>, 333 F.3d 498 (3d Cir. 2003) —
+<li><em>United States v. Khorozian</em>, 333 F.3d 498 (3d Cir. 2003),
 distinguishing machine-generated from human-generated records for
 hearsay analysis under FRE 801(a)</li>
 <li><em>Data Protection Commissioner v. Facebook Ireland Ltd and
 Maximilian Schrems</em> (<em>Schrems II</em>), Case C-311/18 (CJEU, July
-16, 2020) — invalidated the EU-U.S. Privacy Shield; established Transfer
+16, 2020), invalidated the EU-U.S. Privacy Shield; established Transfer
 Impact Assessment requirement for SCC-based transfers</li>
 <li><em>Da Silva Moore v. Publicis Groupe &amp; MSL Group</em>, 287
-F.R.D. 182 (S.D.N.Y. 2012) — first judicial approval of
+F.R.D. 182 (S.D.N.Y. 2012), first judicial approval of
 technology-assisted review (predictive coding) for document review;
 established that TAR is an acceptable methodology when transparency and
 validation are demonstrated</li>
 <li><em>Rio Tinto Plc v. Vale S.A.</em>, 306 F.R.D. 125 (S.D.N.Y. 2015)
-— endorsed continuous active learning (TAR 2.0); held TAR is “black
+endorsed continuous active learning (TAR 2.0); held TAR is “black
 letter law” and should not face heightened scrutiny compared to keyword
 search or manual review</li>
-<li><em>Mancia v. Mayflower Textile Services Co.</em>, 253 F.R.D. 354 (D. Md. 2008) —
+<li><em>Mancia v. Mayflower Textile Services Co.</em>, 253 F.R.D. 354 (D. Md. 2008),
 landmark Rule 26(g) ruling; first major judicial endorsement of the
 Sedona Conference Cooperation Proclamation; established affirmative duty
 of cooperation in discovery</li>
 <li><em>William A. Gross Construction Associates v. American
-Manufacturers Mutual Insurance</em>, 256 F.R.D. 134 (S.D.N.Y. 2009) —
+Manufacturers Mutual Insurance</em>, 256 F.R.D. 134 (S.D.N.Y. 2009),
 criticized keyword-only search methodology as unreliable; called for
 cooperation and validated search protocols</li>
 </ol>
@@ -3717,7 +3754,7 @@ cooperation and validated search protocols</li>
 <ol start="18" type="1">
 <li>FRCP Rules 16(b), 26(b), 26(f), 26(g), 34(b)(2)(E), 37(e); Advisory
 Committee Notes to the 2015 Amendments</li>
-<li>FRE Rules 502(d), 702 (amended Dec. 1, 2023 — proponent bears burden
+<li>FRE Rules 502(d), 702 (amended Dec. 1, 2023, proponent bears burden
 of reliability by preponderance), 803(6), 901(a), 901(b)(1)/(3)/(9),
 902(13), 902(14)</li>
 <li>44 U.S.C. Chapters 21, 29, 31, 33 (Federal Records Act); 44 U.S.C.
@@ -3725,7 +3762,7 @@ of reliability by preponderance), 803(6), 901(a), 901(b)(1)/(3)/(9),
 records, approved schedules); 44 U.S.C. 3314 (unauthorized destruction
 of records)</li>
 <li>18 U.S.C. 2071 (concealment, removal, or mutilation of records)</li>
-<li>5 U.S.C. 552 (FOIA); 5 U.S.C. 552a (Privacy Act — system-of-records
+<li>5 U.S.C. 552 (FOIA); 5 U.S.C. 552a (Privacy Act, system-of-records
 notices, accounting of disclosures, access and amendment rights)</li>
 <li>32 CFR Part 2002 (CUI); EO 13556</li>
 <li>SEC Rule 17a-3 (books and records creation); SEC Rule 17a-4
@@ -3773,12 +3810,12 @@ Electronic Discovery</em> (2017)</li>
 <li>The Sedona Conference, <em>The Sedona Conference Cooperation
 Proclamation</em> (2008)</li>
 <li>EDRM, <em>Guidelines for E-Discovery Processing</em> (2022)</li>
-<li>EDRM, <em>Processing Standards Guide</em>, Version 2 — operational
+<li>EDRM, <em>Processing Standards Guide</em>, Version 2, operational
 processing standards addressing hashing, chain of custody, exception
 handling, metadata cataloging, and deduplication</li>
 <li>SWGDE, <em>Minimum Requirements for Testing Tools Used in Digital
 and Multimedia Forensics</em> (18-Q-001, Version 2.1, March 2024;
-replaces <em>Recommended Guidelines for Validation Testing</em> — the
+replaces <em>Recommended Guidelines for Validation Testing</em>, the
 title change reflects a shift from recommendations to minimum
 requirements; consult swgde.org for current edition)</li>
 <li>SWGDE, <em>Best Practices for Digital Evidence Collection</em>
@@ -3786,10 +3823,10 @@ requirements; consult swgde.org for current edition)</li>
 </ol>
 <h3 id="technical-standards">Technical Standards</h3>
 <ol start="43" type="1">
-<li>ISO/IEC 27037:2012 (digital evidence — acquisition scope);
+<li>ISO/IEC 27037:2012 (digital evidence, acquisition scope);
 27042:2015 (analysis and interpretation); 27043:2015 (incident
 investigation principles and processes)</li>
-<li>ISO/IEC 27050:2019/2021 Parts 1–4 (electronic discovery — Part 1:
+<li>ISO/IEC 27050:2019/2021 Parts 1–4 (electronic discovery, Part 1:
 overview and concepts; Part 2: governance and management; Part 3: code
 of practice; Part 4: ICT readiness)</li>
 <li>NIST SP 800-53 Rev. 5; SP 800-86; SP 800-101 Rev 1; SP 800-131A Rev
@@ -3815,23 +3852,23 @@ and Security Literature</h3>
 eDiscovery Institute (2019)</li>
 <li>Grossman, M.R. &amp; Cormack, G.V., “Technology-Assisted Review in
 E-Discovery Can Be More Effective and More Efficient Than Exhaustive
-Manual Review,” <em>17 Rich. J.L. &amp; Tech. 11</em> (2011) —
+Manual Review,” <em>17 Rich. J.L. &amp; Tech. 11</em> (2011),
 foundational study establishing TAR’s validity using TREC Legal Track
 data</li>
 <li>Grossman, M.R. &amp; Cormack, G.V., “Evaluation of Machine-Learning
 Protocols for Technology-Assisted Review in Electronic Discovery,”
-<em>Proceedings of the 37th ACM SIGIR Conference</em> (2014) —
+<em>Proceedings of the 37th ACM SIGIR Conference</em> (2014),
 established continuous active learning (TAR 2.0) as superior to simple
 active learning</li>
 <li>Grossman, M.R., Cormack, G.V. &amp; Baron, J.R., “Does the LLMperor
 Have New Clothes? Some Thoughts on the Use of LLMs in eDiscovery,”
-<em>SSRN</em> (September 2024) — extends TAR validation standards to
+<em>SSRN</em> (September 2024), extends TAR validation standards to
 LLM-based tools</li>
-<li>Baron, J.R., et al., TREC Legal Track (2006–2009) — NIST-organized
+<li>Baron, J.R., et al., TREC Legal Track (2006–2009), NIST-organized
 evaluation of search and retrieval methods; established empirical
 baselines for keyword search recall (22–57%)</li>
 <li>Peck, A.J., “Search, Forward,” <em>Law Technology News</em> (October
-2011) — previewed TAR’s potential and limitations of manual review and
+2011), previewed TAR’s potential and limitations of manual review and
 keyword search</li>
 <li>Schneier, B. &amp; Kelsey, J., “Secure Audit Logs to Support
 Computer Forensics,” ACM TISSEC 2(2), 1999</li>
@@ -3904,7 +3941,7 @@ of database commit timestamps (Section 5.3.1)</td>
 </tr>
 <tr>
 <td><strong>ESI</strong></td>
-<td>Electronically stored information — the legal term for digital data
+<td>Electronically stored information, the legal term for digital data
 subject to discovery, regulatory retention, or records management</td>
 </tr>
 <tr>
@@ -3936,14 +3973,14 @@ authority)</td>
 <tr>
 <td><strong>ISO 17025</strong></td>
 <td>ISO/IEC 17025, <em>General requirements for the competence of
-testing and calibration laboratories</em> — the accreditation standard
+testing and calibration laboratories</em>, the accreditation standard
 referenced by FSR Codes of Practice for digital forensic service
 providers</td>
 </tr>
 <tr>
 <td><strong>ISO 27037</strong></td>
 <td>ISO/IEC 27037:2012, <em>Guidelines for identification, collection,
-acquisition and preservation of digital evidence</em> — normatively
+acquisition and preservation of digital evidence</em>, normatively
 scoped to acquisition, not processing, but its principles (hash at
 extraction, document every action, maintain source integrity) are
 architecturally relevant by analogy (see Section 4 scope note)</td>
@@ -3951,13 +3988,13 @@ architecturally relevant by analogy (see Section 4 scope note)</td>
 <tr>
 <td><strong>ISO 27042</strong></td>
 <td>ISO/IEC 27042:2015, <em>Guidelines for the analysis and
-interpretation of digital evidence</em> — the primary ISO standard
+interpretation of digital evidence</em>, the primary ISO standard
 governing processing-stage methodology, requiring reproducibility,
 repeatability, and justifiability of analytical methods</td>
 </tr>
 <tr>
 <td><strong>ISO 27050</strong></td>
-<td>ISO/IEC 27050, <em>Information technology — Electronic
+<td>ISO/IEC 27050, <em>Information technology, Electronic
 discovery</em> (Parts 1–4), the international standard specifically
 addressing eDiscovery processes, including preservation, collection,
 processing, review, and production of ESI</td>
@@ -3983,13 +4020,13 @@ resources, and burden (FRCP 26(b)(1); Sedona Principle 2)</td>
 </tr>
 <tr>
 <td><strong>SBOM</strong></td>
-<td>Software Bill of Materials — a complete inventory of software
+<td>Software Bill of Materials, a complete inventory of software
 dependencies, versions, and licenses</td>
 </tr>
 <tr>
 <td><strong>Sedona Principles</strong></td>
 <td>The Sedona Conference, <em>The Sedona Principles, Third Edition</em>
-(2018) — a widely cited set of best practices for electronic document
+(2018), a widely cited set of best practices for electronic document
 production; Principle 2 (proportionality) and Principle 6 (responding
 party obligations) are referenced in this paper</td>
 </tr>
@@ -4005,13 +4042,13 @@ and the processing status</td>
 </tr>
 <tr>
 <td><strong>WAL</strong></td>
-<td>Write-Ahead Log — a database journaling mechanism that records
+<td>Write-Ahead Log, a database journaling mechanism that records
 changes before they are committed, enabling crash recovery; referenced
 in Section 5.3 and 7.2</td>
 </tr>
 <tr>
 <td><strong>WORM</strong></td>
-<td>Write Once, Read Many — historically the sole compliant storage
+<td>Write Once, Read Many, historically the sole compliant storage
 mechanism under SEC 17a-4; the October 2022 amendments (SEC Release
 No. 34-96034) now also permit audit-trail alternatives that detect
 alteration or destruction of records</td>
@@ -4022,8 +4059,8 @@ alteration or destruction of records</td>
 <hr />
 <h2 id="afterword">Afterword</h2>
 <p>Twenty-five years of systems integration across regulated industries
-— pharmaceutical manufacturing, banking and financial services, legal
-technology, government records management, defense and intelligence —
+pharmaceutical manufacturing, banking and financial services, legal
+technology, government records management, defense and intelligence,
 have taught me something that no single sector’s compliance manual will
 tell you: the plumbing is substantially the same, regardless of which
 regulator is watching.</p>
@@ -4052,13 +4089,18 @@ patterns and design for them from the start, not bolt them on after the
 fact. Existing tools may implement some or all of them; this paper’s
 contribution is noting the convergence and naming the common patterns
 that emerge from cross-sector analysis.</p>
-<p><strong>A note on AI assistance.</strong> This paper was co-authored
-with Claude (Anthropic). The architectural thesis, design decisions, and
-practitioner perspective are mine. Claude contributed to research,
-drafting, regulatory cross-referencing, and iterative refinement through
-structured multi-persona review. Legal citations, case law references,
-and regulatory citations were assembled with AI assistance and verified
-by the author, but readers should independently verify any citation they
+<p><strong>A note on AI assistance.</strong> AI tools (Claude, Anthropic)
+were used extensively in the writing of this paper. The architectural
+thesis, the nine principles, and the practitioner perspective are the
+author's own. AI contributed to research, drafting, regulatory
+cross-referencing, and citation assembly. The paper was refined through a
+structured multi-persona review process in which AI-generated panelists
+representing distinct regulatory and technical perspectives challenged
+the arguments across multiple rounds. This AI-assisted review is
+distinct from the human peer review acknowledged above; both processes
+contributed to the final text. Legal citations, case law references, and
+regulatory standards were assembled with AI assistance and verified by
+the author, but readers should independently verify any citation they
 intend to rely upon in legal proceedings or regulatory filings.</p>
 <hr />
 <p><em>This is a convergence analysis. It identifies the architectural
