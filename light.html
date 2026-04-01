@@ -16,46 +16,50 @@
     --ex-slate-50: #F8FAFC; --ex-slate-900: #0F172A;
     --ex-emerald: #10B981; --ex-amber: #F59E0B; --ex-red: #EF4444; --ex-blue: #3B82F6;
     --bg: white; --fg: var(--ex-slate-900); --bg-alt: var(--ex-slate-100);
-    --border: var(--ex-slate-200); --th-bg: var(--ex-slate-800); --th-fg: var(--ex-slate-50);
-    --bq-bg: #FFF7ED; --bq-fg: var(--ex-slate-800);
+    --border: var(--ex-slate-200); --th-bg: #2A3545; --th-fg: #FFFFFF;
+    --bq-bg: rgba(0, 0, 0, 0.04); --bq-fg: var(--ex-slate-800);
     --code-bg: var(--ex-slate-100); --code-border: var(--ex-slate-200); --code-fg: var(--ex-cyan-700);
     --h1-color: var(--ex-cyan-700); --h2-color: var(--ex-slate-900); --h3-color: var(--ex-slate-800);
     --h4-color: var(--ex-slate-700); --link-color: var(--ex-cyan-700);
 }
 
-@page { size: A4; margin: 18mm 16mm 22mm 16mm;
+@page { size: A4; margin: 18mm 16mm 22mm 16mm; orphans: 3; widows: 3;
     @bottom-center { content: "Compliance-First Data Processing \2014 Daniel Berry"; font-size: 7pt; color: #64748B; font-family: 'Segoe UI', sans-serif; }
     @bottom-right { content: counter(page); font-size: 7pt; color: #64748B; font-family: 'Segoe UI', sans-serif; }
 }
 @page :first { @bottom-center { content: none; } @bottom-right { content: none; } }
 * { box-sizing: border-box; }
-body { font-family: 'Segoe UI', 'Inter', 'Helvetica Neue', sans-serif; font-size: 10pt; line-height: 1.7; color: var(--fg); background: var(--bg); max-width: 900px; margin: 0 auto; padding: 20px 40px; }
+body { font-family: 'Segoe UI', 'Inter', 'Helvetica Neue', sans-serif; font-size: 10pt; line-height: 1.5; color: var(--fg); background: var(--bg); max-width: 900px; margin: 0 auto; padding: 20px 40px; }
 h1 { font-size: 20pt; font-weight: 600; color: var(--h1-color); margin: 28px 0 10px; }
-h2 { font-size: 14pt; font-weight: 600; color: var(--h2-color); margin: 28px 0 8px; padding-bottom: 4px; border-bottom: 2px solid var(--ex-cyan-500); }
-h3 { font-size: 11pt; font-weight: 600; color: var(--h3-color); margin: 18px 0 6px; }
-h4 { font-size: 10pt; font-weight: 600; color: var(--h4-color); margin: 14px 0 4px; }
-p { margin: 8px 0; }
+h2 { font-size: 14pt; font-weight: 600; color: var(--h2-color); margin: 48px 0 16px; padding-bottom: 4px; border-bottom: 2px solid var(--ex-cyan-500); }
+h3 { font-size: 12pt; font-weight: 400; color: var(--ex-cyan-500); margin: 32px 0 10px; }
+h4 { font-size: 10pt; font-weight: 600; color: var(--h4-color); margin: 24px 0 -6px; }
+p { margin: 12px 0; text-wrap: pretty; }
+p:has(> strong:first-child) { margin-top: 24px; }
 a { color: var(--link-color); text-decoration: none; }
 a:hover { text-decoration: underline; }
 strong { font-weight: 600; }
 em { font-style: italic; }
-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 9pt; }
-thead th { background: var(--th-bg); color: var(--th-fg); font-weight: 600; text-align: left; padding: 8px 12px; font-size: 8.5pt; text-transform: uppercase; letter-spacing: 0.04em; }
-tbody td { padding: 6px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0 32px 0; font-size: 9pt; }
+thead th { background: var(--th-bg); color: var(--th-fg); font-weight: 600; text-align: left; padding: 8px 12px; font-size: 8.5pt; text-transform: uppercase; letter-spacing: 0.04em; border: 1px solid var(--border); }
+tbody td { padding: 6px 12px; border: 1px solid var(--border); vertical-align: top; }
 tbody tr:nth-child(even) { background: var(--bg-alt); }
 code { font-family: Consolas, 'JetBrains Mono', monospace; font-size: 8.5pt; background: var(--code-bg); border: 1px solid var(--code-border); border-radius: 3px; padding: 1px 5px; color: var(--code-fg); }
 pre { background: var(--code-bg); border: 1px solid var(--code-border); border-radius: 4px; padding: 12px; overflow-x: auto; margin: 12px 0; }
 pre code { border: none; padding: 0; background: none; }
-blockquote { border-left: 3px solid var(--ex-cyan-500); background: var(--bq-bg); padding: 12px 18px; margin: 14px 0; border-radius: 0 4px 4px 0; font-size: 9.5pt; color: var(--bq-fg); }
-ul, ol { padding-left: 22px; margin: 8px 0; }
-li { margin: 4px 0; }
-hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
-.cover { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 90vh; text-align: center; background: linear-gradient(135deg, var(--ex-navy) 0%, var(--ex-slate-800) 100%); color: #F1F5F9; margin: -20px -40px 30px; padding: 60px 40px; }
-.cover .brand { font-size: 11pt; font-weight: 300; letter-spacing: 6px; text-transform: uppercase; color: #94A3B8; margin-bottom: 30px; }
-.cover h1 { font-size: 24pt; font-weight: 300; letter-spacing: 1px; margin: 0; line-height: 1.3; color: #F1F5F9; border: none; }
+blockquote { border: 2px solid var(--border); background: var(--bq-bg); padding: 12px 18px; margin: 14px 0; border-radius: 4px; font-size: 9.5pt; color: var(--bq-fg); }
+blockquote strong { color: var(--bq-fg); }
+ul { padding-left: 22px; margin: 8px 0; list-style: none; }
+ul li::before { content: "›"; color: var(--ex-cyan-500); font-weight: 600; font-size: 1.2em; line-height: 0; display: inline-block; width: 1em; margin-left: -1em; }
+ol { padding-left: 22px; margin: 8px 0; }
+li { margin: 10px 0; }
+hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+.cover { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 90vh; text-align: center; background: #FFFFFF; color: #111111; margin: -20px -40px 30px; padding: 60px 40px; }
+.cover .brand { font-size: 11pt; font-weight: 300; letter-spacing: 6px; text-transform: uppercase; color: #555555; margin-bottom: 30px; }
+.cover h1 { font-size: 24pt; font-weight: 300; letter-spacing: 1px; margin: 0; line-height: 1.3; color: #111111; border: none; }
 .cover .accent { width: 60px; height: 2px; background: linear-gradient(90deg, #FF9425, #EF6A00); margin: 24px auto; }
-.cover .subtitle { font-size: 11pt; color: #CBD5E1; margin-top: 8px; font-weight: 400; }
-.cover .doc-meta { font-size: 9pt; color: #64748B; margin-top: 30px; line-height: 2.2; }
+.cover .subtitle { font-size: 11pt; color: #444444; margin-top: 8px; font-weight: 400; }
+.cover .doc-meta { font-size: 9pt; color: #666666; margin-top: 30px; line-height: 2.2; }
 .cover .author-name { font-size: 10pt; color: #FF9425; font-weight: 400; letter-spacing: 1px; }
 
 </style>
