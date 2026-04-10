@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Multi-Digest Hashing: Empirical Cost Analysis</title>
+<style>
+
+@page {
+    size: A4;
+    margin: 6mm 12mm 6mm 12mm;
+}
+
+:root {
+    --accent: #EF6A00;
+    --accent-light: #FF9425;
+    --fg: #0F172A;
+    --fg-muted: #475569;
+    --fg-light: #64748B;
+    --bg-alt: #F8FAFC;
+    --border: #E2E8F0;
+    --th-bg: #2A3545;
+    --th-fg: #FFFFFF;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Segoe UI', 'Inter', 'Helvetica Neue', sans-serif;
+    font-size: 8.5pt;
+    line-height: 1.4;
+    color: var(--fg);
+    background: white;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4mm 6mm;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+}
+.header-left .brand {
+    font-size: 7pt;
+    font-weight: 300;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--fg-light);
+}
+.header-left h1 {
+    font-size: 14pt;
+    font-weight: 300;
+    color: var(--fg);
+    margin-top: 1px;
+    letter-spacing: 0.3px;
+}
+.header-right {
+    text-align: right;
+    font-size: 7.5pt;
+    color: var(--fg-muted);
+    line-height: 1.5;
+    padding-top: 2px;
+}
+.header-right .author { color: var(--accent); font-weight: 500; }
+
+/* Section headings */
+h2 {
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 8px 0 3px;
+    letter-spacing: 0.02em;
+}
+
+p { margin: 3px 0; }
+strong { font-weight: 600; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin: 3px 0 6px 0; font-size: 8pt; }
+thead th {
+    background: var(--th-bg); color: var(--th-fg); font-weight: 600;
+    text-align: left; padding: 3px 6px; font-size: 7pt;
+    text-transform: uppercase; letter-spacing: 0.04em; border: 1px solid var(--border);
+}
+tbody td { padding: 2px 6px; border: 1px solid var(--border); vertical-align: top; }
+tbody tr:nth-child(even) { background: var(--bg-alt); }
+td.num { text-align: right; font-family: Consolas, 'JetBrains Mono', monospace; font-size: 7.5pt; }
+
+/* Callout */
+.callout {
+    border: 2px solid var(--accent);
+    border-radius: 5px;
+    padding: 6px 12px;
+    margin: 6px 0;
+    background: rgba(239, 106, 0, 0.03);
+}
+.callout p { margin: 2px 0; font-size: 8.5pt; }
+.callout-title { font-weight: 600; font-size: 9pt; color: var(--accent); margin-bottom: 2px; }
+
+/* Two column layout */
+.two-col { display: flex; gap: 16px; }
+.two-col > div { flex: 1; }
+
+/* Footer */
+.footer {
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px solid var(--border);
+    font-size: 6.5pt;
+    color: var(--fg-light);
+    line-height: 1.3;
+}
+
+/* Workload profile bars */
+.workload-row { display: flex; align-items: center; margin: 3px 0; font-size: 7.5pt; }
+.workload-label { width: 140px; text-align: right; padding-right: 8px; color: var(--fg-muted); flex-shrink: 0; line-height: 1.2; }
+.workload-track { flex: 1; height: 20px; background: #F1F5F9; border: 1px solid var(--border); border-radius: 2px; overflow: hidden; display: flex; }
+.workload-hash { background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 6.5pt; font-weight: 600; color: white; }
+.workload-other { background: #CBD5E1; }
+.workload-value { padding-left: 6px; width: 100px; font-size: 7.5pt; color: var(--fg-muted); flex-shrink: 0; }
+
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <div class="header-left">
+        <div class="brand">Signature Strategy</div>
+        <h1>Multi-Digest Hashing: Empirical Cost Analysis</h1>
+    </div>
+    <div class="header-right">
+        <span class="author">Daniel Berry</span><br/>
+        April 2026<br/>
+        Companion to: <em>Compliance-First Data<br/>Processing Architecture</em>
+    </div>
+</div>
+
+<!-- Context -->
+<p>A reasonable objection to the five-algorithm hash set proposed in <em>Compliance-First
+Data Processing Architecture</em> (Berry, 2026, Appendix C) is that computing five
+cryptographic digests per item imposes substantial cost at scale. This note provides
+empirical data to quantify that cost across different workload profiles, so the trade-off
+can be evaluated on evidence rather than intuition.</p>
+
+<!-- Two columns: methodology + algorithm throughput -->
+<div class="two-col">
+<div>
+<h2>Test Environment</h2>
+<p><strong>CPU:</strong> AMD Ryzen Threadripper 7960X (24-core, 4.2 GHz)<br/>
+<strong>RAM:</strong> 128 GB DDR5 &nbsp;|&nbsp; <strong>Storage:</strong> NVMe SSD<br/>
+<strong>Software:</strong> Python 3.13 / OpenSSL (SHA-NI hardware acceleration)<br/>
+<strong>Method:</strong> In-memory data, 64 KB chunks, 5 rounds, median reported.
+Single-pass architecture: one read, five hash instances updated per chunk.</p>
+</div>
+<div>
+<h2>Per-Algorithm Throughput</h2>
+<table>
+<thead>
+<tr><th>Algorithm</th><th>Throughput</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr><td>MD5</td><td class="num">1.02 GB/s</td><td>Broken (legacy only)</td></tr>
+<tr><td>SHA-1</td><td class="num">2.41 GB/s</td><td>Weakened</td></tr>
+<tr><td><strong>SHA-256</strong></td><td class="num"><strong>2.22 GB/s</strong></td><td><strong>Current standard</strong></td></tr>
+<tr><td>SHA-512</td><td class="num">1.13 GB/s</td><td>No HW accel.</td></tr>
+<tr><td>SHA3-256</td><td class="num">0.64 GB/s</td><td>Structural hedge</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- Single-pass cost table -->
+<h2>Single-Pass Cost: SHA-256 Only vs. All Five</h2>
+<table>
+<thead>
+<tr>
+<th>Data Size</th>
+<th>Representative Item</th>
+<th style="text-align:right">SHA-256 Only</th>
+<th style="text-align:right">All 5 (Single Pass)</th>
+<th style="text-align:right">Added Time</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong>1 KB</strong></td><td>Short email, metadata record</td><td class="num">1 &micro;s</td><td class="num">8 &micro;s</td><td class="num">+7 &micro;s</td></tr>
+<tr><td><strong>64 KB</strong></td><td>Typical email with attachment</td><td class="num">24 &micro;s</td><td class="num">239 &micro;s</td><td class="num">+215 &micro;s</td></tr>
+<tr><td><strong>1 MB</strong></td><td>Office document / PDF</td><td class="num">0.4 ms</td><td class="num">4.0 ms</td><td class="num">+3.6 ms</td></tr>
+<tr><td><strong>16 MB</strong></td><td>Large spreadsheet / presentation</td><td class="num">7.0 ms</td><td class="num">63.8 ms</td><td class="num">+56.8 ms</td></tr>
+<tr><td><strong>64 MB</strong></td><td>Small PST / archive segment</td><td class="num">27.3 ms</td><td class="num">265 ms</td><td class="num">+238 ms</td></tr>
+<tr><td><strong>256 MB</strong></td><td>Disk image chunk / large container</td><td class="num">113 ms</td><td class="num">1,015 ms</td><td class="num">+902 ms</td></tr>
+</tbody>
+</table>
+
+<p><strong>The raw overhead is approximately 9x.</strong> The single-pass architecture
+eliminates redundant I/O, but the CPU cost of five hash functions is real. On NVMe storage
+(3-7 GB/s sequential read), all-five throughput of 0.25 GB/s on a single thread is CPU-bound, not I/O-bound.</p>
+
+<!-- Workload profiles -->
+<h2>What the 9x Means in Practice: It Depends on the Workload</h2>
+
+<p>The practical impact depends entirely on what else the pipeline does:</p>
+
+<div style="margin: 6px 0 8px 0;">
+
+<div class="workload-row">
+<div class="workload-label"><strong>Pure hashing</strong><br/><span style="font-size: 6.5pt;">Forensic imaging, triage, hash verification</span></div>
+<div class="workload-track">
+<div class="workload-hash" style="width: 100%;">Hashing</div>
+</div>
+<div class="workload-value"><strong>~100%</strong> / 9x overhead</div>
+</div>
+
+<div class="workload-row">
+<div class="workload-label"><strong>Extract + hash</strong><br/><span style="font-size: 6.5pt;">Container extraction, metadata, no OCR</span></div>
+<div class="workload-track">
+<div class="workload-other" style="width: 55%;"></div>
+<div class="workload-hash" style="width: 35%;">Hash</div>
+<div class="workload-other" style="width: 10%;"></div>
+</div>
+<div class="workload-value"><strong>~35%</strong> / ~3x overhead</div>
+</div>
+
+<div class="workload-row">
+<div class="workload-label"><strong>Full eDiscovery</strong><br/><span style="font-size: 6.5pt;">Extraction, OCR, indexing, classification</span></div>
+<div class="workload-track">
+<div class="workload-other" style="width: 30%; background: #334155;"></div>
+<div class="workload-other" style="width: 25%; background: #475569;"></div>
+<div class="workload-other" style="width: 22%; background: #64748B;"></div>
+<div class="workload-hash" style="width: 8%;"></div>
+<div class="workload-other" style="width: 15%; background: #94A3B8;"></div>
+</div>
+<div class="workload-value"><strong>~8%</strong> / ~7% overhead</div>
+</div>
+
+</div>
+
+<p>For pure hashing workloads, multi-digest cost is the <em>entire</em> cost and the 9x
+multiplier applies directly. SHA-256-only is the defensible default unless specific
+regulatory requirements justify additional algorithms.</p>
+
+<!-- Scale projection -->
+<h2>Scale: Wall-Clock Impact (Single Thread, Hash Time Only)</h2>
+
+<div class="two-col">
+<div>
+<table>
+<thead>
+<tr><th>Volume</th><th style="text-align:right">SHA-256</th><th style="text-align:right">All 5</th><th style="text-align:right">Added</th></tr>
+</thead>
+<tbody>
+<tr><td>100 GB</td><td class="num">46s</td><td class="num">6.9m</td><td class="num">+6.2m</td></tr>
+<tr><td>500 GB</td><td class="num">3.9m</td><td class="num">34.6m</td><td class="num">+30.8m</td></tr>
+<tr><td>1 TB</td><td class="num">7.7m</td><td class="num">1.2h</td><td class="num">+1.0h</td></tr>
+<tr><td>10 TB</td><td class="num">1.3h</td><td class="num">11.5h</td><td class="num">+10.3h</td></tr>
+</tbody>
+</table>
+</div>
+<div style="padding-top: 4px;">
+<p style="font-size: 8pt;">These are <strong>hash-only, single-thread</strong> projections.
+Multi-worker engines multiply throughput: 8 workers processing different items achieve
+~2 GB/s aggregate for all-five, comparable to single-thread SHA-256-only. Pipeline
+concurrency further masks the cost when hashing overlaps with extraction of other items.</p>
+</div>
+</div>
+
+<!-- Conclusion -->
+<div class="callout">
+<div class="callout-title">Conclusion</div>
+<p>The CPU cost of five-digest hashing is <strong>real and measurable</strong>, not
+negligible. For hashing-dominant workloads, the overhead is substantial; for full processing
+pipelines, it represents roughly 7% of total throughput. The correct engineering response is
+<strong>configurable, auditable mode selection</strong>: forensic mode (all five) when
+regulatory defensibility warrants it; non-forensic mode (SHA-256 only) when it does not.
+The processing manifest records the decision, making it reviewable and defensible in
+either direction.</p>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+<strong>Acknowledgment.</strong> This study was prompted by feedback from
+<strong>Harlan Carvey</strong>, who observed that five-algorithm hashing imposes non-trivial
+cost and is not standard practice in most private-sector DF engagements. That observation is
+correct, and the data above quantifies it.
+&bull; <strong>Reproducibility:</strong>
+<a href="https://github.com/Signature-Strategy/compliance-first-architecture">github.com/Signature-Strategy/compliance-first-architecture</a>
+</div>
+
+</body>
+</html>

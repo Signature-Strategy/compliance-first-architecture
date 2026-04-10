@@ -7,6 +7,58 @@ from v0.1 through v0.5.
 
 ---
 
+## [v1.1] — 2026-04-03
+
+### Terminology
+- Replaced "universal" with "convergent" throughout (~19 instances across
+  full papers). The convergence thesis identifies patterns that independent
+  traditions arrive at; "convergent" is more accurate and more defensible
+  than "universal," which implies exhaustive coverage.
+
+### New content
+- **Glossary**: Added "Item" definition (atomic unit of processing output),
+  "CMMC" (Cybersecurity Maturity Model Certification), and "DORA" (Digital
+  Operational Resilience Act)
+- **Section 1**: Author's note restructured as clearly demarcated authorship
+  statement (blockquote with heading) per reviewer feedback
+- **Section 5**: Added quick-reference card table mapping all nine patterns
+  to groups and key invariants
+- **Section 7.6**: New subsection on third-party extraction library
+  challenges, elevated from Appendix D.8; includes containerized deployment
+  considerations
+- **Section 10.2**: Acknowledged CFTT test corpus construction as a research
+  program; acknowledged fidelity rate ground truth cost
+- **Section 10.6**: New subsection on processing SLAs and incremental
+  processing
+- **Section 12**: Strengthened DoD/IC positioning: CMMC Level 2 mention,
+  air-gapped environments, supply-chain attacks reframed as graduated
+  architectural concern
+- **Section 14**: Strengthened jurisdictional scope note (US perspective,
+  internationally adaptable); added cost implications acknowledgment;
+  noted recurring panel concerns as out-of-scope future work; reinforced
+  independent positioning
+- **Appendix A.2**: Added anti-forensics detection as evidence paragraph;
+  added mobile device data paragraph; strengthened FSR statutory enforcement
+- **Appendix A.4**: Added continuous/streaming processing note, voice
+  recording (MiFID II), WORM regulatory uncertainty, DORA/EMIR
+- **Appendix A.5**: Added legitimate interest balancing test mapping,
+  Art. 20 data portability, chilling effect acknowledgment; strengthened
+  erasure tension with EDPB guidance
+- **Appendix A.6.1**: Added inference precision (FP32/FP16/INT8) to model
+  provenance fields
+- **Appendix E**: Added air-gapped and cross-domain deployment paragraph
+
+### Attribution
+- Added Bjornar Sigurdsson to Acknowledgments for Hypothesis annotations
+
+### Panel review integration
+- 20-persona simulated panel review conducted; findings incorporated
+  throughout. Panel endorsed convergence thesis and architectural patterns;
+  criticisms were editorial and structural, not foundational. Recurring
+  concerns noted as out-of-scope future work in Section 14.
+
+---
+
 ## [v1.0] — 2026-03-27
 
 ### Version 1.0 Release

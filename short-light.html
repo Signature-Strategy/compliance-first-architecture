@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link rel="canonical" href="https://signature-strategy.github.io/compliance-first-architecture/short-dark.html"/>
+<link rel="canonical" href="https://signature-strategy.github.io/compliance-first-architecture/short-light.html"/>
 <title>Executive Brief, Compliance-First Data Processing</title>
 <script src="https://hypothes.is/embed.js" async></script>
 <style>
@@ -38,6 +38,8 @@ p { margin: 12px 0; text-wrap: pretty; }
 p:has(> strong:first-child) { margin-top: 24px; }
 a { color: var(--link-color); text-decoration: none; }
 a:hover { text-decoration: underline; }
+a[href^="http"]::after { content: "997"; font-size: 0.7em; vertical-align: super; opacity: 0.5; }
+a[href^="http"]:hover::after { opacity: 0.8; }
 strong { font-weight: 600; }
 em { font-style: italic; }
 table { width: 100%; border-collapse: collapse; margin: 12px 0 32px 0; font-size: 9pt; }
@@ -79,7 +81,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
     <div class="subtitle">Executive Brief</div>
     <div class="doc-meta">
         <span class="author-name">Daniel Berry</span><br/>
-        March 2026
+        April 2026
     </div>
     <a class="full-paper-link" href="light.html">Read the full paper &rarr;</a>
 </div>
@@ -112,7 +114,7 @@ individuals of this paper's conclusions.</em></p>
 <ol>
   <li>Every technical decision is evaluated against the governing standards before implementation.</li>
   <li>The engine&rsquo;s internal behavior is observable and auditable.</li>
-  <li>Verification is automated, independent, and runs on every extraction; the verification gate is architecturally firewalled from the processing pipeline and takes precedence where conflicts arise.</li>
+  <li>Verification is automated, independent, and runs on every extraction. The verification gate runs independently of the processing pipeline; if the gate and the processor disagree, the gate wins.</li>
 </ol>
 
 <p>The distinction between a processing engine that <em>happens</em> to be compliant and one <em>designed</em> for compliance is the distinction between luck and intent. Courts, regulators, records officers, and privacy authorities all evaluate intent.</p>
@@ -193,10 +195,10 @@ individuals of this paper's conclusions.</em></p>
 </tbody>
 </table>
 
-<p class="section-ref"><a href="light.html#nine-defensible-principles">Full principle analysis &rarr; Section 5</a></p>
+<p class="section-ref"><a href="light.html#universal-architectural-patterns">Full principle analysis &rarr; Section 5</a></p>
 
 <blockquote>
-<p><strong>These nine principles are necessary but not sufficient.</strong> They define the architectural foundation. An engine that implements all nine without the organizational process controls (legal hold enforcement, retention governance, operator qualification, exception triage with sign-off authority) has the infrastructure for compliance without the practice of it.</p>
+<p><strong>An engine that implements all nine patterns but lacks the organizational discipline to act on what they produce has the infrastructure for compliance without the practice of it.</strong> The patterns are the foundation, not the whole building. Legal hold enforcement, retention governance, operator qualification, and exception triage with sign-off authority are the organizational controls that make the architecture operational.</p>
 </blockquote>
 
 <h2>Two Processing Modes</h2>
@@ -245,10 +247,10 @@ individuals of this paper's conclusions.</em></p>
 
 <h2>The Goal</h2>
 
-<p>The goal is not perfection. No processing engine achieves zero failures across all data. The goal is <strong>defensibility</strong>: the ability to demonstrate, with evidence, that reasonable steps were taken, that every item was accounted for, that every failure was documented, and that the methodology is transparent, reproducible, validated, and aligned with the standards that govern the handling of electronically stored information, regardless of which regulatory tradition is asking.</p>
+<p>No processing engine achieves zero failures across all data. The goal is <strong>defensibility</strong>: the ability to demonstrate, with evidence, that reasonable steps were taken, that every item was accounted for, that every failure was documented, and that the methodology is transparent, reproducible, validated, and aligned with the standards that govern the handling of electronically stored information. The plumbing is substantially the same, regardless of which regulator is asking. It is easier to build it once, correctly, than to relitigate first principles in every engagement.</p>
 
 <blockquote>
-<p>The full paper provides the complete regulatory analysis, convergence mapping, sector-specific requirements, security architecture, attack surface analysis, validation methodology, and five detailed appendices covering regulatory detail, fidelity taxonomy, hash algorithm selection, architectural specifications, and distributed deployment.</p>
+<p>The full paper provides the complete regulatory analysis, convergence mapping, sector-specific requirements, security architecture, attack surface analysis, validation methodology, and six detailed appendices covering regulatory detail, fidelity taxonomy, hash algorithm selection, architectural specifications, distributed deployment, and empirical multi-digest hashing cost analysis.</p>
 <p><a href="light.html">Read the full paper &rarr;</a></p>
 </blockquote>
 

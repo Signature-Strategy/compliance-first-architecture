@@ -1,0 +1,64 @@
+{
+  "benchmark_date": "2026-04-09T21:50:56.848585+00:00",
+  "system": {
+    "cpu": "AMD Ryzen Threadripper 7960X 24-Cores",
+    "python": "3.13.12",
+    "ram_gb": 128
+  },
+  "config": {
+    "chunk_size": 65536,
+    "warmup_rounds": 2,
+    "bench_rounds": 5,
+    "algorithms": [
+      "md5",
+      "sha1",
+      "sha256",
+      "sha512",
+      "sha3_256"
+    ]
+  },
+  "results": {
+    "1 KB": {
+      "data_size_bytes": 1024,
+      "description": "Short email / metadata record",
+      "sha256_only_gbps": 0.7335956875955407,
+      "all_five_gbps": 0.11490052018166007,
+      "overhead_vs_sha256_pct": 538.4615895869845
+    },
+    "64 KB": {
+      "data_size_bytes": 65536,
+      "description": "Typical email with small attachment",
+      "sha256_only_gbps": 2.4912309025367088,
+      "all_five_gbps": 0.2558053488004711,
+      "overhead_vs_sha256_pct": 873.8775651950405
+    },
+    "1 MB": {
+      "data_size_bytes": 1048576,
+      "description": "Office document / PDF",
+      "sha256_only_gbps": 2.4017769325446894,
+      "all_five_gbps": 0.24670013891608517,
+      "overhead_vs_sha256_pct": 873.5612404181302
+    },
+    "16 MB": {
+      "data_size_bytes": 16777216,
+      "description": "Large spreadsheet / presentation",
+      "sha256_only_gbps": 2.2214797543580964,
+      "all_five_gbps": 0.24488868339984254,
+      "overhead_vs_sha256_pct": 807.1385919172794
+    },
+    "64 MB": {
+      "data_size_bytes": 67108864,
+      "description": "Small PST / archive segment",
+      "sha256_only_gbps": 2.291761392808513,
+      "all_five_gbps": 0.23554711187214147,
+      "overhead_vs_sha256_pct": 872.9524487027103
+    },
+    "256 MB": {
+      "data_size_bytes": 268435456,
+      "description": "Large container / disk image chunk",
+      "sha256_only_gbps": 2.215308490565192,
+      "all_five_gbps": 0.24627620526592495,
+      "overhead_vs_sha256_pct": 799.5219364262734
+    }
+  }
+}
