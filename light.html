@@ -1487,23 +1487,27 @@ distributed processing are themselves convergent: the same regulatory
 traditions that require chain of custody, audit trails, and
 reconciliation for single-node processing independently require that
 those guarantees extend across node boundaries.</p>
-<p>Five problems define the distributed compliance challenge. First,
-<strong>encounter-sequence partitioning</strong>: a coordinator
+<p>Five problems define the distributed compliance challenge.</p>
+<ul>
+<li><strong>Encounter-sequence partitioning</strong>: the coordinator
 pre-assigns disjoint sequence ranges to nodes so that global ordering
-remains recoverable, a chain-of-custody requirement, not a performance
-one. Second, <strong>crash isolation</strong>: a node failure must not
-compromise other nodes' compliance posture; each node checkpoints
-independently, and the global manifest records exactly which items are
-affected. Third, <strong>cross-node reconciliation</strong>: the union of
-all nodes' output must account for every input item, checked by a global
-compliance gate, not just per-node gates, because items can be lost in
-transit between coordinator, worker, and storage. Fourth,
-<strong>manifest composition</strong>: each node produces a manifest
-fragment; the coordinator composes them into a single artifact that lets
-a post-hoc examiner reconstruct what happened where, when, and with what
-result. Fifth, <strong>coordinator failure</strong>: when the coordinator
-becomes unavailable, the compliance-first default is halt, processing
-can be resumed, but compliance violations cannot be undone.</p>
+remains recoverable. This is a chain-of-custody requirement, not a
+performance optimization.</li>
+<li><strong>Crash isolation</strong>: a node failure must not compromise
+other nodes' compliance posture. Each node checkpoints independently,
+and the global manifest records exactly which items are affected.</li>
+<li><strong>Cross-node reconciliation</strong>: the union of all nodes'
+output must account for every input item. A global compliance gate, not
+just per-node gates, performs this check, because items can be lost in
+transit between coordinator, worker, and storage.</li>
+<li><strong>Manifest composition</strong>: each node produces a manifest
+fragment; the coordinator composes these fragments into a single artifact
+that lets a post-hoc examiner reconstruct what happened where, when, and
+with what result.</li>
+<li><strong>Coordinator failure</strong>: when the coordinator becomes
+unavailable, the compliance-first default is to halt. Processing can be
+resumed; compliance violations cannot be undone.</li>
+</ul>
 <p>The architectural detail behind each of these problems is in Appendix
 E. The key insight is that distribution is a deployment decision, not a
 compliance decision, the same nine patterns apply, the compliance
@@ -1935,8 +1939,8 @@ transparency</td>
 <td>Daubert: methodology must be testable and yield consistent
 results</td>
 <td><a href="https://www.iso.org/standard/44406.html">ISO 27042</a>: reproducibility requires documented variance</td>
-<td>—</td>
-<td>—</td>
+<td>n/a</td>
+<td>n/a</td>
 <td><a href="https://gdpr-info.eu/art-5-gdpr/">GDPR Art. 5(1)(a)</a>: transparency requires explainable
 outcomes</td>
 <td>Stochastic models require variance documentation, seed logging,
