@@ -79,7 +79,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
     <div class="doc-meta">
         <span class="author-name">Daniel Berry</span><br/>
         President &amp; Founder, Signature Strategy, LLC<br/><br/>
-        Version 1.0 &bull; March 2026
+        Version 1.1 &bull; May 2026
     </div>
 </div>
 <h2 id="abstract">Abstract</h2>
@@ -681,6 +681,27 @@ accountability</td>
 </tr>
 </tbody>
 </table>
+<p>The convergence has a deeper root than regulatory mimicry. In 1910,
+the French criminologist Edmond Locard articulated what became the
+foundational axiom of forensic science: <em>every contact leaves a
+trace</em>. Locard was describing physical evidence (dust, fibers, tool
+marks), but the principle generalizes. When data passes through a
+processing system, the system contacts every item it encounters, and
+each contact must leave a trace, or the processing is unaccountable.
+Civil litigation requires it: Daubert and <a href="https://www.law.cornell.edu/rules/fre/rule_702">FRE 702</a> demand documented,
+reproducible processing methodology. Digital forensics codifies it:
+<a href="https://www.iso.org/standard/44406.html">ISO 27042</a> requires recording every analytical action performed on
+evidence. Federal records management mandates it:
+<a href="https://www.law.cornell.edu/uscode/text/44/3101">44 U.S.C. &sect;3101</a> requires complete documentation of records
+throughout their lifecycle. Financial services enforces it:
+<a href="https://www.law.cornell.edu/cfr/text/17/section-240.17a-4">SEC 17a-4</a> requires immutable audit trails for every record
+transformation. Privacy law operationalizes it:
+<a href="https://gdpr-info.eu/art-5-gdpr/">GDPR Art. 5(2)</a> places the burden of demonstrating processing
+accountability on the controller. The nine convergent patterns identified
+in <a href="#universal-architectural-patterns">Section 5</a> are the architectural expression of Locard’s axiom
+applied to data processing systems: every contact the engine makes with
+data must leave a documented, verifiable, cryptographically anchored
+trace.</p>
 <p>The convergence is not coincidental. Every tradition addresses the
 same fundamental problem: when data passes through a system, how do you
 prove nothing was lost, nothing was altered, chain of custody is intact, and
@@ -2571,6 +2592,14 @@ that govern the handling of electronically stored information. The
 plumbing is substantially the same, regardless of which regulator is
 asking. It is easier to build it once, correctly, than to relitigate
 first principles in every engagement.</p>
+<p>This paper opened by showing that five independent regulatory
+traditions converge on the same architectural requirements, and named
+Locard's exchange principle as the reason: every contact leaves a trace.
+The nine convergent patterns are the digital expression of that axiom.
+A processing engine that implements them does not merely comply with
+current regulation; it satisfies the deeper invariant that every
+regulatory tradition, present and future, exists to enforce. Build for
+the invariant, and compliance follows.</p>
 <hr />
 <h2 id="appendix-a-sector-specific-regulatory-detail">Appendix A:
 Sector-Specific Regulatory Detail</h2>
@@ -4360,6 +4389,14 @@ the proportionality argument underlying the two-mode architecture.</p>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>1.1</td>
+<td>2026-05-02</td>
+<td>Added Locard's exchange principle as theoretical foundation for
+regulatory convergence (<a href="#the-regulatory-convergence">Section 4</a>);
+added Locard callback to <a href="#conclusion">Section 15</a> conclusion.
+Version bump to 1.1.</td>
+</tr>
 <tr>
 <td>1.0</td>
 <td>2026-03-27</td>
