@@ -79,7 +79,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
     <div class="doc-meta">
         <span class="author-name">Daniel Berry</span><br/>
         President &amp; Founder, Signature Strategy, LLC<br/><br/>
-        Version 1.1 &bull; May 2026
+        Version 1.2 &bull; May 2026
     </div>
 </div>
 <h2 id="abstract">Abstract</h2>
@@ -1800,11 +1800,13 @@ the same algorithmic transparency requirements as other AI-assisted
 processing decisions (<a href="#ai-augmented-processing-algorithmic-decision-transparency">Section 9</a>) and must be recorded in the processing
 manifest.</p>
 <p>In non-forensic mode, known-file filtering (de-NISTing) against the
-NSRL requires MD5 or SHA-1 lookups, since NSRL hash sets are distributed
-in those algorithms only. Implementations choosing SHA-256-only
-non-forensic mode must either compute an additional legacy hash for NSRL
-comparison or forgo hash-based known-file filtering, documenting the
-decision in the processing manifest.</p>
+NSRL historically required MD5 or SHA-1 lookups. As of 2025, NIST
+distributes the NSRL Reference Data Set (RDS) with SHA-256 values in
+addition to legacy algorithms, reducing this trade-off. Implementations
+using SHA-256-only non-forensic mode can now perform NSRL lookups
+directly, though legacy hash sets and third-party known-file databases
+may still require MD5 or SHA-1. The algorithm choice should be
+documented in the processing manifest.</p>
 <h3 id="modern-esi-sources">8.2 Modern ESI Sources</h3>
 <p>Contemporary collections include Slack, Teams, Discord, WhatsApp, and
 other platforms that introduce compliance challenges absent from
@@ -1985,12 +1987,19 @@ documentation under <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj">Art
 filtering in eDiscovery <em>may</em> qualify as high-risk under Annex III,
 point 8 (administration of justice and democratic processes), though
 this is contested for private-party civil litigation, which is
-distinguishable from government administration of justice. As of March 2026, these obligations
-are not yet in force. This paper cites the AI Act's architectural
-direction, record-keeping (<a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj">Art. 12</a>) and human oversight (<a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj">Art. 14</a>),
+distinguishable from government administration of justice. As of May 2026, the Annex III high-risk obligations (including
+use-based classifications such as administration of justice) have been
+deferred to December 2, 2027 under the Digital Omnibus Agreement
+(Council/Parliament, May 2026); product-regulated high-risk obligations
+(Annex I) are deferred to August 2, 2028. Prohibited practices and
+GPAI model rules are already in force. This paper cites the AI Act's
+architectural direction, record-keeping
+(<a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj">Art. 12</a>)
+and human oversight
+(<a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj">Art. 14</a>),
 because the convergence with existing traditions is clear, but
 practitioners should distinguish between currently applicable provisions
-and those taking effect in August 2026.</p>
+and those taking effect under the deferred timeline.</p>
 </blockquote>
 <p>For processing engines, this convergence produces specific
 architectural requirements. The model identifier (name, version, and a
@@ -2538,8 +2547,9 @@ quarantined, not merely “recorded.” The engine’s handling of legally
 restricted content requires procedural controls that sit above the
 architectural invariants described here.</p>
 <p><strong>Jurisdictional scope.</strong> The analysis is weighted
-toward US federal law and EU/UK data protection. Other jurisdictions (US
-state laws, PIPL, PDPA, LGPD) may impose requirements that do not fit
+toward US federal law and EU/UK data protection. Other jurisdictions (the
+now 20 US states with comprehensive consumer privacy laws, PIPL, PDPA,
+LGPD) may impose requirements that do not fit
 the convergence framework. UK expert evidence admissibility, for
 example, is governed by Criminal Procedure Rules Part 19 and Civil
 Procedure Rules Part 35, applying different criteria from
@@ -2868,9 +2878,12 @@ from GDPR and warrant separate treatment.</li>
 </ul>
 <h3 id="a.4-financial-services">A.4 Financial Services</h3>
 <p>No-silent-drops ensures no communications are lost, critical given
-the SEC’s 2021–2024 enforcement wave against recordkeeping failures
-($200M combined SEC/CFTC penalty against J.P. Morgan (Dec. 2021),
-16-firm sweep (2022), continuing through 2024). The CFTC pursued
+the SEC’s 2021–2026 enforcement wave against recordkeeping failures,
+which has resulted in cumulative civil penalties exceeding $3 billion
+across more than 100 entities ($200M combined SEC/CFTC penalty against
+J.P. Morgan (Dec. 2021), 16-firm sweep (2022), 70+ firms and $500M+
+in 2024 alone, continuing into 2025). FINRA has intensified individual
+enforcement in parallel, including industry bars. The CFTC pursued
 parallel actions under Rule 1.31, which mirrors <a href="https://www.ecfr.gov/current/title-17/section-240.17a-4">SEC 17a-4</a> for
 derivatives markets. A processing engine serving financial services
 clients must address both regimes.</p>
@@ -3031,6 +3044,21 @@ transfers; the EU’s adequacy decision for the UK (June 2021, with an original
 sunset clause of June 2025 that has been extended by the European
 Commission) and the UK’s own adequacy assessments must be tracked
 independently.</p>
+<p><strong>UK Data (Use and Access) Act 2025.</strong> The DUA Act
+(enacted June 2025) materially diverges from EU GDPR in three areas
+relevant to processing engine design. First, it narrows automated
+decision-making obligations: the UK no longer mirrors Art. 22’s
+broad prohibition, instead requiring safeguards only for decisions
+producing “significant” effects under a new recognized
+legitimate interest framework. Second, it introduces a list of
+recognized legitimate interests for which no balancing test is
+required, potentially simplifying legal basis selection for certain
+processing activities. Third, it authorizes proportionate searches for
+DSAR compliance, allowing processors to limit search scope where the
+cost or effort of retrieval is disproportionate. Processing engines
+operating across both EU and UK jurisdictions must maintain
+jurisdiction-aware configuration to apply the stricter EU standard by
+default while allowing UK-specific relaxations where applicable.</p>
 <p><strong>Enforcement exposure.</strong> <a href="https://gdpr-info.eu/art-83-gdpr/">Art. 83(4)</a> violations (privacy
 by design, processor obligations, records of processing) carry fines up
 to €10M / 2% of global turnover; <a href="https://gdpr-info.eu/art-83-gdpr/">Art. 83(5)</a> violations (processing
@@ -3821,9 +3849,11 @@ derived from SHA-256 (not MD5 or SHA-1, where practical collisions
 exist). For SHA-256, the probability of an accidental collision is
 negligible (~2^-128 for birthday attacks), but the theoretical concern
 should be documented in the processing manifest. If the engine
-encounters a write to an existing path where the source differs
-(detectable by comparing file sizes), it must treat this as an anomaly
-and log it rather than silently overwriting.</p>
+encounters a write to an existing path where a file already exists, it
+must perform a full byte-for-byte comparison (not merely a file size
+check, since different files may share the same size). If the content
+differs, the engine must treat this as an anomaly and log it rather
+than silently overwriting.</p>
 <p><strong>Storage-layer failure modes.</strong> Disk full conditions
 during binary write must not cause the item record to be lost: the item
 is recorded with a “Success-BinaryWriteFailed” status enabling targeted
@@ -3906,10 +3936,14 @@ updating the original stub’s audit trail.</p>
 <p><strong>The WAL exposure window.</strong> A crash between batch
 commits leaves in-flight items extracted but uncommitted. On recovery,
 these items are re-extracted. Re-extraction must produce identical
-hashes and metadata; encounter-sequence numbers are assigned fresh from
-the last checkpoint, with the gap marking the crash boundary. Text
-extraction may vary slightly due to parser non-determinism; the
-reproducibility protocol (<a href="#error-rate-framework">Section 10.2</a>) bounds this variance.</p>
+source file hashes (the binary content hash of the source container or file
+is deterministic and must match); encounter-sequence numbers are assigned fresh from
+the last checkpoint, with the gap marking the crash boundary. Extracted
+content hashes (text, metadata) may vary slightly due to parser
+non-determinism; the distinction matters for testimony, because source
+integrity can be confirmed by hash comparison while extracted content
+integrity relies on the reproducibility protocol
+(<a href="#error-rate-framework">Section 10.2</a>), which bounds this variance.</p>
 <p><strong>Partial-run composition.</strong> The final output is the
 union of all run segments. The processing manifest records each segment
 (start/end sequence, start/end time, termination reason). The compliance
@@ -4390,6 +4424,18 @@ the proportionality argument underlying the two-mode architecture.</p>
 </thead>
 <tbody>
 <tr>
+<td>1.2</td>
+<td>2026-05-18</td>
+<td>Adversarial panel review (7 agents). Corrections: crash recovery hash
+contradiction (D.7), NSRL SHA-256 availability, EU AI Act Omnibus
+timeline deferral, CAS byte-level collision handling. Additions: 6 new
+case law entries (Hoffer, Gregory, Morgan, Tremblay, Concord, Proposed
+FRE 707), 7 technical standards (ISO 42001, ISO 27701:2025, ISO 21043,
+CMMC 2.0, NIST 800-53 r5.2.0, NIST AI 600-1), SEC/FINRA cumulative
+enforcement update, UK Data (Use and Access) Act 2025 divergence
+analysis, US state privacy law scope expansion (20 states).</td>
+</tr>
+<tr>
 <td>1.1</td>
 <td>2026-05-02</td>
 <td>Added Locard's exchange principle as theoretical foundation for
@@ -4550,6 +4596,28 @@ of cooperation in discovery</li>
 Manufacturers Mutual Insurance</em>, 256 F.R.D. 134 (S.D.N.Y. 2009),
 criticized keyword-only search methodology as unreliable; called for
 cooperation and validated search protocols</li>
+<li><em>Hoffer v. Tellone</em>, No. 23-1260 (2d Cir., Feb. 13, 2025),
+held that FRCP 37(e)(2) sanctions require proof by preponderance that
+the accused party acted with "intent to deprive"; contributes to
+emerging circuit consensus on the specific-intent standard</li>
+<li><em>Gregory v. State of Montana</em>, No. 22-35694 (9th Cir.,
+Sept. 27, 2024), held that Rule 37(e) forecloses reliance on inherent
+authority for severe spoliation sanctions; recklessness is insufficient
+for 37(e)(2)</li>
+<li><em>Morgan v. V2X, Inc.</em>, No. 1:23-cv-01824 (D. Colo.,
+Mar. 30, 2026), required that before uploading Confidential Information
+to any AI platform, the provider must be contractually prohibited from
+storing or using inputs for model training, disclosing inputs to third
+parties, and that any third party be bound by comparable protective
+obligations; parties must disclose the name of AI tools used in
+processing confidential information</li>
+<li><em>Tremblay v. OpenAI, Inc.</em>, No. 3:23-cv-03223 (N.D. Cal.,
+Aug. 8, 2024), held that attorney-crafted AI prompts and outputs
+constitute opinion work product; establishes a boundary condition for
+AI transparency requirements in processing</li>
+<li><em>Concord Music Group v. Anthropic PBC</em> (May 23, 2025),
+followed <em>Tremblay</em> in treating attorney-crafted investigation
+prompts as opinion work product</li>
 </ol>
 <h3 id="federal-rules-and-statutes">Federal Rules and Statutes</h3>
 <ol start="18" type="1">
@@ -4557,7 +4625,10 @@ cooperation and validated search protocols</li>
 Committee Notes to the 2015 Amendments</li>
 <li>FRE Rules 502(d), 702 (amended Dec. 1, 2023, proponent bears burden
 of reliability by preponderance), 803(6), 901(a), 901(b)(1)/(3)/(9),
-902(13), 902(14)</li>
+902(13), 902(14); Proposed FRE 707 (Advisory Committee vote May 2, 2025;
+public comment closed Feb. 16, 2026): would require machine-generated
+evidence offered without an expert witness to satisfy Rule 702(a)-(d)
+reliability requirements</li>
 <li><a href="https://www.law.cornell.edu/uscode/text/44">44 U.S.C.</a> Chapters 21, 29, 31, 33 (Federal Records Act); <a href="https://www.law.cornell.edu/uscode/text/44">44 U.S.C.</a>
 3101 (agency recordkeeping duties); <a href="https://www.law.cornell.edu/uscode/text/44">44 U.S.C.</a> 3303a (disposal of
 records, approved schedules); <a href="https://www.law.cornell.edu/uscode/text/44">44 U.S.C.</a> 3314 (unauthorized destruction
@@ -4596,7 +4667,8 @@ permanent electronic records to NARA)</li>
 46, 48, 49; EDPB Guidelines 2/2018 on derogations of Article 49 (adopted
 May 2018); EDPB Recommendations 01/2020 on supplementary transfer
 measures (final version adopted June 2021)</li>
-<li>CCPA/CPRA; LGPD (Brazil); PIPL (China); PDPA (Singapore/Thailand);
+<li>CCPA/CPRA and 20 US state comprehensive privacy laws (as of 2026);
+LGPD (Brazil); PIPL (China); PDPA (Singapore/Thailand);
 POPIA (South Africa)</li>
 </ol>
 <h3 id="professional-standards">Professional Standards</h3>
@@ -4645,6 +4717,29 @@ examine those processes and achieve the same result; the person in
 charge has overall responsibility for ensuring the law and principles
 are adhered to) remain foundational in UK digital forensics
 practice</li>
+<li>ISO/IEC 42001:2023, <em>Artificial intelligence, Management
+system</em>, establishes a management system framework for responsible
+AI that aligns with ISO 27001 and ISO 27701; certifications growing
+rapidly since publication</li>
+<li>ISO/IEC 27701:2025, <em>Privacy information management</em> (major
+revision), now a standalone standard (no longer requires ISO 27001 as
+prerequisite); expanded scope includes AI-related privacy risks,
+algorithmic transparency, automated decision-making, and AI-driven
+profiling; transition period to 2028</li>
+<li>ISO 21043 Parts 1-5 (2018-2025), <em>Forensic sciences</em>:
+establishes quality management, recognition, and process requirements
+for forensic science activities; bridges ISO 17025 (lab accreditation)
+and ISO 27042 (digital evidence analysis)</li>
+<li>32 CFR Part 170, <em>Cybersecurity Maturity Model Certification
+(CMMC) 2.0</em> (final rule Dec. 2024), requires NIST 800-171
+compliance verification through third-party assessment for defense
+industrial base organizations handling CUI</li>
+<li>NIST SP 800-53 Release 5.2.0 (Aug. 2025), new controls for
+software integrity (SI-07(12)), logging syntax (SA-15(13)), design for
+cyber resiliency (SA-24), and root cause analysis (SI-02(07))</li>
+<li>NIST AI 600-1 (July 2024), <em>Generative AI Profile</em>,
+companion resource to AI RMF 1.0 defining 12 risk categories unique to
+generative AI and 400+ management actions</li>
 </ol>
 <h3 id="processing-search-and-security-literature">Processing, Search,
 and Security Literature</h3>
